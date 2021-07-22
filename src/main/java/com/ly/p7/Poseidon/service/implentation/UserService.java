@@ -1,4 +1,6 @@
 package com.ly.p7.Poseidon.service.implentation;
 
-public class UserService implements IUserService{
+import com.ly.p7.Poseidon.service.interfaces.IUserService;
+
+public class UserService implements IUserService {
 }

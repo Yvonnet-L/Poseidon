@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/css/home.css}"/>
 <head>
       <title>Spring Boot</title>
 </head>
@@ -10,7 +11,8 @@
 	    <form th:action="@{/app-logout}" method="POST">
 	         <input type="submit" value="Logout"/>
 	    </form>
-   </div> 	 
+   </div>
+   <p>Il me prend bien mes pages HTML puisque la page est issue de templates/error !! Oo</p>
     <p class="error" th:text="${errorMsg}">Error</p>
 </body>
 </html>   
