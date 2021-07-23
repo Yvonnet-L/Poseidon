@@ -1,25 +1,21 @@
 package com.ly.p7.Poseidon.dto;
 
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
+import javax.persistence.*;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
-    /*
-      Lombok:
-        @FieldDefaults(level=AccessLevel.PRIVATE) : passe tous les champs en private ;
-        @NoArgsConstructor : génère le constructeur sans argument et public ;
-        @AllArgsConstructor : génère le constructeur avec tous les arguments et public (pour l'exemple) ;
-        @Getter : génère tous les getters sur les champs ;
-        @Setter : génère tous les setters sur les champs ;
-        @EqualsAndHashCode(of=...) : génère equals et hashCode (et d'autres méthodes) sur les champs donnés ;
-        @ToString(of=...) : génère toString sur les champs donnés.
-    */
+/*
+  Lombok:
+    @FieldDefaults(level=AccessLevel.PRIVATE) : passe tous les champs en private ;
+    @NoArgsConstructor : génère le constructeur sans argument et public ;
+    @AllArgsConstructor : génère le constructeur avec tous les arguments et public (pour l'exemple) ;
+    @Getter : génère tous les getters sur les champs ;
+    @Setter : génère tous les setters sur les champs ;
+    @EqualsAndHashCode(of=...) : génère equals et hashCode (et d'autres méthodes) sur les champs donnés ;
+    @ToString(of=...) : génère toString sur les champs donnés.
+*/
 @Getter
 @Setter
 @NoArgsConstructor
@@ -31,6 +27,8 @@ public class UserDTO {
     private Integer id;
 
     @NotBlank(message = "Username is mandatory")
+    @Pattern(regexp ="[a-zA-Z\\+\\-\\+]{2,100}",
+             message = "the name must contain at least 2 alphanumeric characters")
     private String username;
 
 
@@ -42,11 +40,24 @@ public class UserDTO {
 
 
     @NotBlank(message = "FullName is mandatory")
+    @Pattern(regexp ="[a-zA-Z\\+\\-\\+]{2,100}",
+            message = "the name must contain at least 2 alphanumeric characters")
     private String fullname;
+
+
 
 
     @NotBlank(message = "Role is mandatory")
     private String role;
+
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    public UserDTO(String username, String password, String fullname, String role) {
+        this.username = username;
+        this.password = password;
+        this.fullname = fullname;
+        this.role = role;
+    }
 
     //---------------------------------------------------------------------------------------------------------------------------------------
 }

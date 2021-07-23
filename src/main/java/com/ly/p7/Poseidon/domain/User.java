@@ -4,28 +4,40 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
+import lombok.*;
 
-import org.hibernate.validator.constraints.Length;
-
+/**
+ *  Class User which allows the link with the users table of the DB
+ *
+ */
 
 @Entity
 @Table(name = "users")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
-    @NotEmpty(message = "Username is mandatory")
-    @Length(min = 1, message = "trop court")
+
     private String username;
-    @NotBlank(message = "Password is mandatory")
-    @Pattern(regexp ="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}",
-                message = "The password must be at least 8 characters long including: 1 uppercase letter, 1 number, 1 symbol (@ # $% ^ & + =)")
+
     private String password;
-    @NotBlank(message = "FullName is mandatory")
+
     private String fullname;
-    @NotBlank(message = "Role is mandatory")
+
     private String role;
 
+    //------------------ Constructor -------------------------------------------------------------------------------
+    public User(String username, String fullname, String password, String role) {
+        this.username = username;
+        this.password = password;
+        this.fullname = fullname;
+        this.role = role;
+    }
+    //--------------------------------------------------------------------------------------------------------------
     public Integer getId() {
         return id;
     }
