@@ -1,13 +1,11 @@
-package com.ly.p7.Poseidon.conttoller;
+package com.ly.p7.Poseidon.controller;
 
-import com.ly.p7.Poseidon.domain.User;
 import com.ly.p7.Poseidon.dto.UserDTO;
 import com.ly.p7.Poseidon.repositories.UserRepository;
 import com.ly.p7.Poseidon.service.interfaces.IUserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -64,36 +62,31 @@ public class UserController {
     //-----------------------------------------------------------------------------------------------------------------
     @GetMapping("/user/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-        user.setPassword("");
-        model.addAttribute("user", user);
+        logger.info( "--> Launch /user/update/{id} with id = " + id );
+        UserDTO userDTO  = userService.getUserById(id);
+        model.addAttribute("userDTO", userDTO);
         return "user/update";
     }
     //-----------------------------------------------------------------------------------------------------------------
     @PostMapping("/user/update/{id}")
-    public String updateUser(@PathVariable("id") Integer id, @Valid User user,
+    public String updateUser(@PathVariable("id") Integer id, @Valid UserDTO userDTO,
                              BindingResult result, Model model) {
         logger.info( "--> Launch /user/update/{id} + id: " + id );
+        logger.info( "--> Launch /user/update/{id} + userDTO.getId: " + userDTO.getId() );
         if (result.hasErrors()) {
             return "user/update";
         }
+        userService.updateUser(userDTO, userDTO.getId());
 
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        user.setPassword(encoder.encode(user.getPassword()));
-        user.setId(id);
-        userRepository.save(user);
-        model.addAttribute("users", userRepository.findAll());
-        logger.info( "-->   user/update id: " + id + " - SUCCESS -" );
+        logger.info( "-->   user/update id: " + userDTO.getId() + " - OK -" );
         return "redirect:/user/list";
     }
     //-----------------------------------------------------------------------------------------------------------------
     @GetMapping("/user/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id, Model model) {
         logger.info( "--> Launch /user/delete/{id} + id: " + id );
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-        userRepository.delete(user);
-        logger.info( "-->   user/delete id: " + id + " - SUCCESS -" );
-        model.addAttribute("users", userRepository.findAll());
+        userService.deleteUser(id);
+        logger.info( "-->   user/delete id: " + id + " - OK -" );
         return "redirect:/user/list";
     }
     //-----------------------------------------------------------------------------------------------------------------

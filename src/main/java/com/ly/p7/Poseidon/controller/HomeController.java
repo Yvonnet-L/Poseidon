@@ -1,4 +1,4 @@
-package com.ly.p7.Poseidon.conttoller;
+package com.ly.p7.Poseidon.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
