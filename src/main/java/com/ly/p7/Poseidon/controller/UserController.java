@@ -54,9 +54,10 @@ public class UserController {
         if (!result.hasErrors()) {
             userService.addUser(userDTO);
             model.addAttribute("users", userRepository.findAll());
-            logger.info( " --->   user/validate - OK -" );
+            logger.info( "  --> **  User created ** id: " + userDTO.getId());
             return "redirect:/user/list";
         }
+        logger.info( "  --> **  Errors ** Nb error: " + result.getErrorCount());
         return "user/add";
     }
     //-----------------------------------------------------------------------------------------------------------------
@@ -74,11 +75,11 @@ public class UserController {
         logger.info( "--> Launch /user/update/{id} + id: " + id );
         logger.info( "--> Launch /user/update/{id} + userDTO.getId: " + userDTO.getId() );
         if (result.hasErrors()) {
+            logger.info( "  --> **  Errors ** Nb error: " + result.getErrorCount());
             return "user/update";
         }
         userService.updateUser(userDTO, userDTO.getId());
-
-        logger.info( "-->   user/update id: " + userDTO.getId() + " - OK -" );
+        logger.info( "  --> **  User updated ** id: " + id);
         return "redirect:/user/list";
     }
     //-----------------------------------------------------------------------------------------------------------------
@@ -86,7 +87,7 @@ public class UserController {
     public String deleteUser(@PathVariable("id") Integer id, Model model) {
         logger.info( "--> Launch /user/delete/{id} + id: " + id );
         userService.deleteUser(id);
-        logger.info( "-->   user/delete id: " + id + " - OK -" );
+        logger.info( "  --> **  User Deleted ** id: " + id);
         return "redirect:/user/list";
     }
     //-----------------------------------------------------------------------------------------------------------------

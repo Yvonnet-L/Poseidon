@@ -1,71 +1,99 @@
 package com.ly.p7.Poseidon.domain;
 
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
+
+/**
+ *  Class DidList which allows the link with the bitList table of the DB
+ */
 
 @Entity
 @Table(name = "bidlist")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class BidList {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer BidListId;
-    @NotEmpty(message = "Account is mandatory")
+    @Column(name = "bid_list_id")
+    private Integer bidListId;
+
     private String account;
-    @NotBlank(message = "Type is mandatory")
+
     private String type;
-    @NotNull(message = "biQuantity is mandatory")
-    @Min(value = 0 )
+
+    @Column(name = "bid_quantity")
     private Double bidQuantity;
-    @NotNull(message = "askQuantity is mandatory")
+
+    @Column(name = "ask_quantity")
     private Double askQuantity;
-    @NotNull(message = "bid is mandatory")
+
     private Double bid;
-    @NotNull(message = "ask is mandatory")
+
     private Double ask;
-    @NotNull(message = "Benchmark is mandatory")
+
     private String benchmark;
-    @NotNull(message = "BidListDate is mandatory")
+
+    @Column(name = "bid_list_date")
     private Date bidListDate;
-    @NotBlank(message = "Commentary is mandatory")
+
     private String commentary;
-    @NotBlank(message = "Security is mandatory")
+
     private String security;
-    @NotBlank(message = "Status is mandatory")
+
     private String status;
-    @NotBlank(message = "Trader is mandatory")
+
     private String trader;
-    @NotBlank(message = "Book is mandatory")
+
     private String book;
-    @NotNull(message = "CreationName is mandatory")
+
+    @Column(name = "creation_name")
     private String creationName;
-    @NotNull(message = "CreationDate is mandatory")
+
+    @Column(name = "creation_date")
     private Date creationDate;
-    @NotNull(message = "RevisionName is mandatory")
+
+    @Column(name = "revision_name")
     private String revisionName;
-    @NotNull(message = "RevisionDate is mandatory")
+
+    @Column(name = "revision_date")
     private Date revisionDate;
-    @NotBlank(message = "DealName is mandatory")
+
+    @Column(name = "deal_name")
     private String dealName;
-    @NotBlank(message = "DealType is mandatory")
+
+    @Column(name = "deal_type")
     private String dealType;
-    @NotBlank(message = "SourceListId is mandatory")
+
+    @Column(name = "source_list_id")
     private String sourceListId;
-    @NotBlank(message = "RevisionName is mandatory")
+
     private String side;
 
+    //------------------ Constructor -------------------------------------------------------
 
+    public BidList(String account, String type, Double bidQuantity) {
+        this.account = account;
+        this.type = type;
+        this.bidQuantity = bidQuantity;
+    }
+
+
+    //--------------------------------------------------------------------------------------
     public Integer getBidListId() {
-        return BidListId;
+        return bidListId;
     }
 
     public void setBidListId(Integer bidListId) {
-        BidListId = bidListId;
+        this.bidListId = bidListId;
     }
 
     public String getAccount() {

@@ -32,9 +32,9 @@ public class UserService implements IUserService {
     @Autowired
     ModelBuilder modelBuilder;
 
-    private static Logger logger = LogManager.getLogger(UserController.class);
+    private static Logger logger = LogManager.getLogger(UserService.class);
 
-    //-------------------------------------------------------------------------------------------------
+    //----------------getAllUser-------------------------------------------------------------------------------
      /**
       * @return List<UserDTO> userDTOList
       */
@@ -51,7 +51,7 @@ public class UserService implements IUserService {
 
         return userDTOList;
      }
-     //-------------------------------------------------------------------------------------------------
+     //----------------addUser----------------------------------------------------------------------------------
      /**
       * @Param  UserDTO userDTO
       * @return UserDTO validated return of DB
@@ -68,7 +68,7 @@ public class UserService implements IUserService {
 
          return dtoBuilder.buildUserDTO(userAdd);
      }
-     //-------------------------------------------------------------------------------------------------
+     //----------------updateUser-------------------------------------------------------------------------------
      /**
       * @Param idUser
       * @Param userDTO
@@ -90,7 +90,7 @@ public class UserService implements IUserService {
 
          return dtoBuilder.buildUserDTO(userAdd);
      }
-     //-------------------------------------------------------------------------------------------------
+     //-----------------deleteUser------------------------------------------------------------------------------
      /**
       * @param idUser
       */
@@ -103,7 +103,7 @@ public class UserService implements IUserService {
          //- Launch delete -
          userRepository.deleteById(idUser);
      }
-     //-------------------------------------------------------------------------------------------------
+     //-----------------getUserById-----------------------------------------------------------------------------
      /**
       * Method which allows to retrieve a user by its id, if not found return a DataNotFoundException
       *

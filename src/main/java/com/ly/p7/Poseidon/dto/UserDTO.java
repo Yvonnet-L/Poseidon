@@ -27,24 +27,22 @@ public class UserDTO {
     private Integer id;
 
     @NotBlank(message = "Username is mandatory")
-    @Pattern(regexp ="[a-zA-Z\\+\\-\\+]{2,100}",
+    @Pattern(regexp ="[a-zA-Z\\+\\-\\+]{2,125}",
              message = "the name must contain at least 2 alphanumeric characters")
     private String username;
 
 
     @NotBlank(message = "Password is mandatory")
-    @Pattern(regexp ="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}",
+    @Pattern(regexp ="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,125}",
             message = "The password must be at least 8 characters long including: " +
                              "1 uppercase letter, 1 number, 1 symbol (@ # $% ^ & + =)")
     private String password;
 
 
     @NotBlank(message = "FullName is mandatory")
-    @Pattern(regexp ="[a-zA-Z\\+\\-\\+]{2,100}",
+    @Pattern(regexp ="[a-zA-Z\\+\\-\\+]{2,125}",
             message = "the name must contain at least 2 alphanumeric characters")
     private String fullname;
-
-
 
 
     @NotBlank(message = "Role is mandatory")
