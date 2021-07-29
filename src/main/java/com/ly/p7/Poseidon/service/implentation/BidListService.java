@@ -78,7 +78,7 @@ public class BidListService implements IBidListService {
      * @return BidListDTO validated return of DB
      */
     @Override
-    public BidListDTO updateUser(BidListDTO bidListDTO, int idBidList) {
+    public BidListDTO updateBidList(BidListDTO bidListDTO, int idBidList) {
         logger.info(" ---> updateBidList with id: " + idBidList);
         BidList bidListVerif = bidListRepository.findById(idBidList).orElseThrow(()
                 -> new DataNotFoundException("BidList with id=" + idBidList + " not found in DataBase"));

@@ -11,7 +11,7 @@ public interface IBidListService {
 
     BidListDTO addBidList(BidListDTO bidListDTO);
 
-    BidListDTO updateUser(BidListDTO bidListDTO, int idBidList);
+    BidListDTO updateBidList(BidListDTO bidListDTO, int idBidList);
 
     void deleteBidList(int id);
 

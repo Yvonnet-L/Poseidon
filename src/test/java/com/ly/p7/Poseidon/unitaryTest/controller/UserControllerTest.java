@@ -5,7 +5,6 @@ import com.ly.p7.Poseidon.controller.UserController;
 import com.ly.p7.Poseidon.domain.User;
 import com.ly.p7.Poseidon.dto.UserDTO;
 import com.ly.p7.Poseidon.repositories.UserRepository;
-import com.ly.p7.Poseidon.security.MyUserDetailService;
 import com.ly.p7.Poseidon.service.implentation.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -41,9 +40,6 @@ public class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
-    private MyUserDetailService userDetailsService;
-
     @Autowired
     private WebApplicationContext context;
 
@@ -57,7 +53,7 @@ public class UserControllerTest {
         user2DTO = new UserDTO("userNameTwo", "PassWordCorrect-4", "fullNameTwo", "USER");
         mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
     }
-    //-----------------------------------------------------------------------------------------------------------------
+    //----------Get----getUsers---/user/list------------------------------------------------------------------------------------------------
     @Test
     @DisplayName("Test response 200 on getUser")
     public void testGetUsers() throws Exception {
@@ -68,18 +64,18 @@ public class UserControllerTest {
                 .andExpect(status().isOk());
 
     }
-    //--------Get-------/user/update/{id}------------------------------------------------------------------------------------------------
+    //--------Get----showUpdateUser---/user/update/{id}------------------------------------------------------------------------------------------------
     @Test
     @DisplayName("Test response 200 on updateUser")
-    public void testUpdateUser() throws Exception {
+    public void testShowUpdateUser() throws Exception {
         Mockito.when(userService.getUserById(1)).thenReturn(user1DTO);
         mockMvc.perform(MockMvcRequestBuilders.get("/user/update/1"))
                 .andExpect(status().isOk());
     }
-    //--------Post-------/user/update/{id}------------------------------------------------------------------------------------------------
+    //--------Post----updateUser---/user/update/{id}------------------------------------------------------------------------------------------------
     @Test
     @DisplayName("Test response 302/Redirection/Model-hasNoErrors on Post showUpdateForm")
-    public void testShowUpdateFormWithUserDTOConform() throws Exception {
+    public void testUpdateUserWithUserDTOConform() throws Exception {
         UserDTO  userDTO = new UserDTO( "flora", "PassWord1+correct", "DO", "USER");
         Mockito.when(userService.updateUser(user1DTO,1)).thenReturn(userDTO);
         mockMvc.perform(MockMvcRequestBuilders.post("/user/update/1")
@@ -95,9 +91,8 @@ public class UserControllerTest {
 
     @Test
     @DisplayName("Test Post showUpdateForm with userDTO not conform, with number in the name" )
-    public void testShowUpdateFormWithUserDTONotConform() throws Exception {
+    public void testUpdateFormWithUserDTONotConform() throws Exception {
         UserDTO  userDTO = new UserDTO( "flora3333", "PassWord1+correct", "DO", "USER");
-        Mockito.when(userService.updateUser(user1DTO,1)).thenReturn(userDTO);
         mockMvc.perform(MockMvcRequestBuilders.post("/user/update/1")
                 .sessionAttr("userDTO", user1DTO)
                 .param("username", userDTO.getUsername())
@@ -205,9 +200,8 @@ public class UserControllerTest {
     @Test
     @DisplayName("Test Get deleteUser responce Ok/redirect")
     public void testDeleteUser() throws Exception{
-        User user = new User(5,"userNameOne", "PassWordCorrect-4", "fullNameOne", "USER");
-        Mockito.when(userRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.ofNullable(user));
-        userService.deleteUser(any(Integer.class));
-        //verify(userRepository).deleteById(any(Integer.class));
+        mockMvc.perform(MockMvcRequestBuilders.get("/user/delete/1"))
+                .andExpect(redirectedUrl("/user/list"))
+                .andExpect(status().is3xxRedirection());
     }
 }

@@ -70,7 +70,7 @@ public class BidListController {
             model.addAttribute(id);
             return "bidList/update";
         }
-        bidListService.updateUser(bidListDTO, id);
+        bidListService.updateBidList(bidListDTO, id);
         logger.info( "  --> **  BidList updated ** id: " + id);
         return "redirect:/bidList/list";
     }
