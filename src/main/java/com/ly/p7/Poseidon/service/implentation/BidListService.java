@@ -83,7 +83,7 @@ public class BidListService implements IBidListService {
         BidList bidListVerif = bidListRepository.findById(idBidList).orElseThrow(()
                 -> new DataNotFoundException("BidList with id=" + idBidList + " not found in DataBase"));
 
-        BidList bidList =modelBuilder.buildBidList(bidListDTO);
+        BidList bidList = modelBuilder.buildBidList(bidListDTO);
         bidList.setBidListId(idBidList);
         bidList = bidListRepository.save(bidList);
         return dtoBuilder.buildUBidListDTO(bidList);

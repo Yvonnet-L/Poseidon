@@ -43,7 +43,7 @@ public class UserServiceTest {
     //---------- GetAll-----------------------------------------------------------------------------------------------------------------
     @Test
     public void getAllUserTest(){
-        //GIVEN
+        // GIVEN
         User user1 = new User(1, "userNameOne", "PassWordCorrect-1", "fullNameOne", "ADMIN");
         User user2 = new User(2, "userNameTwo", "PassWordCorrect-1", "fullNameTwo","USER");
         User user3 = new User(3, "userNameTree", "PassWordCorrect-1", "fullNameTree", "USER");
@@ -114,7 +114,7 @@ public class UserServiceTest {
         // WHEN
         Mockito.when(userRepository.findById(any(int.class))).thenReturn(java.util.Optional.empty());
         // THEN
-        assertThrows(DataNotFoundException.class, () -> userService.deleteUser(2));
+        assertThrows(DataNotFoundException.class, () -> userService.deleteUser(any(Integer.class)));
     }
     //------------GetUserById-------------------------------------------------------------------------------------------------------------
     @Test

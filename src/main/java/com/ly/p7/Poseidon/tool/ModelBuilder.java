@@ -45,9 +45,6 @@ public class ModelBuilder {
 
         return new BidList(bidListDTO.getAccount(), bidListDTO.getType(),
                             bidListDTO.getBidQuantity());
-
-
-
     }
     //-------------------------------------------------------------------------------------------
 }
