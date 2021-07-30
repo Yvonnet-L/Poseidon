@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -43,7 +44,7 @@ public class BidList {
     private String benchmark;
 
     @Column(name = "bid_list_date")
-    private Date bidListDate;
+    private LocalDateTime bidListDate;
 
     private String commentary;
 
@@ -59,13 +60,13 @@ public class BidList {
     private String creationName;
 
     @Column(name = "creation_date")
-    private Date creationDate;
+    private LocalDateTime creationDate;
 
     @Column(name = "revision_name")
     private String revisionName;
 
     @Column(name = "revision_date")
-    private Date revisionDate;
+    private LocalDateTime revisionDate;
 
     @Column(name = "deal_name")
     private String dealName;

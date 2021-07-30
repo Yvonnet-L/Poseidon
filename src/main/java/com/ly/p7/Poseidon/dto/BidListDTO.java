@@ -23,9 +23,8 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class BidListDTO {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer BidListId;
+
+    private Integer bidListId;
 
     @NotEmpty(message = "Account is mandatory")
     private String account;

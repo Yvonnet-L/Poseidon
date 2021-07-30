@@ -22,13 +22,11 @@ import javax.validation.constraints.Pattern;
 @AllArgsConstructor
 public class UserDTO {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
     @NotBlank(message = "Username is mandatory")
     @Pattern(regexp ="[a-zA-Z\\+\\-\\+]{2,125}",
-             message = "the name must contain at least 2 alphanumeric characters")
+             message = "the name must contain at least 2 characters")
     private String username;
 
 
@@ -41,7 +39,7 @@ public class UserDTO {
 
     @NotBlank(message = "FullName is mandatory")
     @Pattern(regexp ="[a-zA-Z\\+\\-\\+]{2,125}",
-            message = "the name must contain at least 2 alphanumeric characters")
+            message = "the name must contain at least 2 characters")
     private String fullname;
 
 
