@@ -96,7 +96,11 @@ public class CurvePointService implements ICurvePointService {
      */
     @Override
     public void deleteCurvePoint(int id) {
-
+        logger.info(" ---> Launch deleteCurvePoint");
+        CurvePoint curvePointVerif = curvePointRepository.findById(id).orElseThrow(()
+                -> new DataNotFoundException("CurvePoint with id=" + id + " not found in DataBase"));
+        curvePointRepository.deleteById(id);
+        logger.info("  ---> ** deleted ** CurvePoint with id: " + id);
     }
     //------------getCurvePointById-------------------------------------------------------------------------------------
     /**

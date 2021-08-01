@@ -96,7 +96,7 @@ public class BidListServiceTest {
 
     //--------------DeleteBidList---------------------------------------------------------------------------------------------------
     @Test
-    public void deleteBidListExisTest(){
+    public void deleteBidListByIdExisTest(){
         // GIVEN
         BidList bidList = new BidList( "account1", "type1", 1.11);
         // WHEN

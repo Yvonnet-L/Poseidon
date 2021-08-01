@@ -104,13 +104,21 @@ public class CurvePointServiceTest {
     //---------- DeleteCurvePointById-----------------------------------------------------------------------------------------------------------------
     @Test
     @DisplayName("Test sur deleteCurvePoint")
-    public void deleteCurvePointByIdTest(){
+    public void deleteCurvePointByIdExistTest(){
         // GIVEN
-
+        CurvePoint curvePointFind = new CurvePoint(4,4,2.22,3.33);
         // WHEN
-
+        Mockito.when(curvePointRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.of(curvePointFind));
         // THEN
-
+        curvePointService.deleteCurvePoint(any(Integer.class));
+    }
+    @Test
+    @DisplayName("Test sur deleteCurvePoint")
+    public void deleteCurvePointByIdNotExistTest(){
+        // WHEN
+        Mockito.when(curvePointRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.empty());
+        // THEN
+        assertThrows(DataNotFoundException.class, () -> curvePointService.deleteCurvePoint(any(Integer.class)));
     }
     //---------- GetCurvePointById-----------------------------------------------------------------------------------------------------------------
     @Test
