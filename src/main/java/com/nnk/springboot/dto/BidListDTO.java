@@ -8,10 +8,7 @@ import lombok.Setter;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 /**
  *  BidlistDTO is the object of the view which makes the link with the BidList model
@@ -32,8 +29,8 @@ public class BidListDTO {
     @NotBlank(message = "Type is mandatory")
     private String type;
 
-    @NotNull(message = "biQuantity is mandatory")
-    @Min(value = 0 )
+    @Digits( fraction = 2, integer = 10, message="Invalid number ( 10 integer max with 2 fraction max )")
+    @Min(value = 0 , message ="must be positif")
     private Double bidQuantity;
 
    //----------Constructor-----------------------------------------------------------------------------------

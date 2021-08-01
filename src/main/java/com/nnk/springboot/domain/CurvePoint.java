@@ -44,5 +44,16 @@ public class CurvePoint {
     //------------------ Constructor -------------------------------------------------------
 
 
+    public CurvePoint(Integer id, Integer curveId, Double term, Double value) {
+        this.id = id;
+        this.curveId = curveId;
+        this.term = term;
+        this.value = value;
+    }
 
+    public CurvePoint(Integer curveId, Double term, Double value) {
+        this.curveId = curveId;
+        this.term = term;
+        this.value = value;
+    }
 }

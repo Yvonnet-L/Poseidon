@@ -1,8 +1,10 @@
 package com.nnk.springboot.unitaryTest.tool;
 
 import com.nnk.springboot.domain.BidList;
+import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.dto.BidListDTO;
+import com.nnk.springboot.dto.CurvePointDTO;
 import com.nnk.springboot.dto.UserDTO;
 import com.nnk.springboot.tool.ModelBuilder;
 import org.junit.jupiter.api.DisplayName;
@@ -37,6 +39,16 @@ public class ModelBuilderTest {
         BidListDTO bidListDTO = new BidListDTO("account1", "Type1", 45.50);
 
         assertThat((modelBuilder.buildBidList(bidListDTO)).equals(bidList));
+
+    }
+    //-------------------------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("CurvePoint Builder Test")
+    public void builderCurvePointTest(){
+        CurvePoint curvePoint= new CurvePoint(1,2, 12.56, 45.50);
+        CurvePointDTO curvePointDTO = new CurvePointDTO(1,2, 12.56, 45.50);
+
+        assertThat((modelBuilder.buildCurvePoint(curvePointDTO)).equals(curvePoint));
 
     }
 }

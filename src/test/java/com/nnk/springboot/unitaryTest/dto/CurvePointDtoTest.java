@@ -1,9 +1,8 @@
 package com.nnk.springboot.unitaryTest.dto;
 
-import com.nnk.springboot.dto.BidListDTO;
+
+import com.nnk.springboot.dto.CurvePointDTO;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import javax.validation.ConstraintViolation;
@@ -14,7 +13,7 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class BidListDtoTest {
+public class CurvePointDtoTest {
 
     private static Validator validator;
 
@@ -23,14 +22,15 @@ public class BidListDtoTest {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
+
     //---------- All Good---------------------------------------------------------------------------------
     @Test
-    public void bidListDtoAllPasramsGoodTest() {
+    public void CurvePointDtoAllPasramsGoodTest() {
         // GIVEN
-        BidListDTO bidListDTO = new BidListDTO(1 , "account1", "type1", 1.11);
+        CurvePointDTO CurvePointDTO = new CurvePointDTO(1 , 12, 12.32, 1.11);
         // WHEN
-        Set<ConstraintViolation<BidListDTO>> constraintViolations =
-                validator.validate(bidListDTO);
+        Set<ConstraintViolation<CurvePointDTO>> constraintViolations =
+                validator.validate(CurvePointDTO);
         // THEN
         assertEquals(0, constraintViolations.size());
     }
@@ -38,33 +38,23 @@ public class BidListDtoTest {
     @Test
     public void AllNullTest() {
         // GIVEN
-        BidListDTO bidListDTO = new BidListDTO(null , null, null, null);
+        CurvePointDTO CurvePointDTO = new CurvePointDTO(null , null, null, null);
         // WHEN
-        Set<ConstraintViolation<BidListDTO>> constraintViolations =
-                validator.validate(bidListDTO);
+        Set<ConstraintViolation<CurvePointDTO>> constraintViolations =
+                validator.validate(CurvePointDTO);
         // THEN
-        assertEquals(2, constraintViolations.size());
+        assertEquals(3, constraintViolations.size());
     }
     //---------- All Empty ---------------------------------------------------------------------------------
     @Test
-    public void AllEmptyTest() {
+    public void ParamsNotCorrectTest() {
         // GIVEN
-        BidListDTO bidListDTO = new BidListDTO(null , "", "", null);
+        CurvePointDTO CurvePointDTO = new CurvePointDTO(1 , 2, 15.566, 12345678901.45);
         // WHEN
-        Set<ConstraintViolation<BidListDTO>> constraintViolations =
-                validator.validate(bidListDTO);
+        Set<ConstraintViolation<CurvePointDTO>> constraintViolations =
+                validator.validate(CurvePointDTO);
         // THEN
         assertEquals(2, constraintViolations.size());
     }
 
-    @Test
-    public void AllEmpty2Test() {
-        // GIVEN
-        BidListDTO bidListDTO = new BidListDTO(null , "  ", "  ", null);
-        // WHEN
-        Set<ConstraintViolation<BidListDTO>> constraintViolations =
-                validator.validate(bidListDTO);
-        // THEN
-        assertEquals(2, constraintViolations.size());
-    }
 }

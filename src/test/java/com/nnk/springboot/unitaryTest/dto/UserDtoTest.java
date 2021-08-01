@@ -2,6 +2,7 @@ package com.nnk.springboot.unitaryTest.dto;
 
 import com.nnk.springboot.dto.UserDTO;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import javax.validation.ConstraintViolation;
@@ -57,6 +58,7 @@ public class UserDtoTest {
     }
     //---------- username & fullname----------------------------------------------------------------------------------
     @Test
+    @Tag("test valid:username & fullname")
     public void namesNotOnlyAlphanumericTest() {
         // GIVEN
         UserDTO userDTO = new UserDTO("Flora33", "PasswordConform3+", "Do45", "USER");
@@ -70,6 +72,7 @@ public class UserDtoTest {
     }
 
     @Test
+    @Tag("test valid:username & fullname")
     public void namesWithOneCharacTest() {
         // GIVEN
         UserDTO userDTO = new UserDTO("a", "PasswordConform3+", "D", "USER");
@@ -85,6 +88,7 @@ public class UserDtoTest {
 
     //---------- password -----------------------------------------------------------------------------------
     @Test
+    @Tag("test valid: password")
     public void passwordIsNullTest() {
         // GIVEN
         UserDTO userDTO = new UserDTO("Flora", null, "DO", "USER");
@@ -97,6 +101,7 @@ public class UserDtoTest {
     }
 
     @Test
+    @Tag("test valid: password")
     public void passwordIsEmptyTest() {
         // GIVEN
         UserDTO userDTO = new UserDTO("Flora", "", "DO", "USER");
@@ -108,6 +113,7 @@ public class UserDtoTest {
     }
 
     @Test
+    @Tag("test valid: password")
     public void passwordWithOutLowerCaseTest() {
         // GIVEN
         UserDTO userDTO = new UserDTO("Flora", "PASSWITHOUTLOWERCASE+3", "DO", "USER");
@@ -122,6 +128,7 @@ public class UserDtoTest {
     }
 
     @Test
+    @Tag("test valid: password")
     public void passwordWithOutHupperCaseTest() {
         // GIVEN
         UserDTO userDTO = new UserDTO("Flora", "passwithoutuppercase+3", "DO", "USER");
@@ -136,6 +143,7 @@ public class UserDtoTest {
     }
 
     @Test
+    @Tag("test valid: password")
     public void passwordWithOutSymbolTest() {
         // GIVEN
         UserDTO userDTO = new UserDTO("Flora", "PassWithOutSymbol3", "DO", "USER");
@@ -150,6 +158,7 @@ public class UserDtoTest {
     }
 
     @Test
+    @Tag("test valid: password")
     public void passwordWithOutNumberTest() {
         // GIVEN
         UserDTO userDTO = new UserDTO("Flora", "PassWithOutNumber+", "DO", "USER");
@@ -164,6 +173,7 @@ public class UserDtoTest {
     }
 
     @Test
+    @Tag("test valid: password")
     public void passwordGoodTest() {
         // GIVEN
         UserDTO userDTO = new UserDTO("Flora", "GoodPassWord+-*/?!9871+", "DO", "USER");
