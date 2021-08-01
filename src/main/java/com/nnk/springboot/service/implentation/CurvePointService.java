@@ -111,6 +111,10 @@ public class CurvePointService implements ICurvePointService {
      */
     @Override
     public CurvePointDTO getCurvePointById(int id) {
-        return null;
+        logger.info(" ---> Launch getCurvePointById");
+        CurvePoint curvePointfind = curvePointRepository.findById(id).orElseThrow(()
+                -> new DataNotFoundException("CurvePoint with id=" + id + " not found in DataBase"));
+        logger.info("  ---> ** find ** CurvePoint with id: " + id);
+        return dtoBuilder.buildCurvePointDTO(curvePointfind);
     }
 }

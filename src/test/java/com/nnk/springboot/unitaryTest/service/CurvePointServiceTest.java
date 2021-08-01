@@ -122,13 +122,25 @@ public class CurvePointServiceTest {
     }
     //---------- GetCurvePointById-----------------------------------------------------------------------------------------------------------------
     @Test
-    @DisplayName("Test sur getAllCurvePoint")
-    public void getCurvePointByIdTest(){
+    @DisplayName("Test sur getCurvePointById with id exist")
+    public void getCurvePointByIdExistTest(){
         // GIVEN
-
+        CurvePoint curvePointFind = new CurvePoint(4,4,2.22,3.33);
+        CurvePointDTO curvePointDTOResult = new CurvePointDTO(4,4,2.22,3.33);
         // WHEN
-
+        Mockito.when(curvePointRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.of(curvePointFind));
+        Mockito.when(dtoBuilder.buildCurvePointDTO(any(CurvePoint.class))).thenReturn(curvePointDTOResult);
         // THEN
-
+        assertThat(curvePointService.getCurvePointById(any(Integer.class))).isEqualTo(curvePointDTOResult);
     }
+
+    @Test
+    @DisplayName("Test sur getCurvePointById with id not exist")
+    public void getCurvePointByIdNotExistTest(){
+        // WHEN
+        Mockito.when(curvePointRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.empty());
+        // THEN
+        assertThrows(DataNotFoundException.class, () -> curvePointService.getCurvePointById(any(Integer.class)));
+    }
+
 }
