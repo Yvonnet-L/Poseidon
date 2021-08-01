@@ -2,6 +2,7 @@ package com.nnk.springboot.unitaryTest.service;
 
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.dto.CurvePointDTO;
+import com.nnk.springboot.exceptions.DataNotFoundException;
 import com.nnk.springboot.repositories.CurvePointRepository;
 import com.nnk.springboot.service.implentation.CurvePointService;
 import com.nnk.springboot.tool.DtoBuilder;
@@ -18,6 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
 public class CurvePointServiceTest {
@@ -68,10 +71,40 @@ public class CurvePointServiceTest {
         assertThat(curvePointService.addCurvePoint(curvePointDTOofView)).isEqualTo(curvePointDTOResult);
 
     }
-    //---------- DeleteCurvePoint-----------------------------------------------------------------------------------------------------------------
+    //---------- UpdateCurvePoint-----------------------------------------------------------------------------------------------------------------
     @Test
-    @DisplayName("Test sur deleteeCurvePoint")
-    public void deleteCurvePointTest(){
+    @DisplayName("Test sur deleteCurvePoint with curvePoint Exist")
+    public void updateCurvePointTestWithCurvePointExist(){
+        // GIVEN
+        CurvePointDTO curvePointDTOofView = new CurvePointDTO(4,4.44,44.44);
+        CurvePoint curvePointBuild = new CurvePoint(4,4.44,44.44);
+        CurvePoint curvePointFind = new CurvePoint(4,4,2.22,3.33);
+        CurvePoint curvePointResultSave = new CurvePoint(4,4,4.44,44.44);
+        CurvePointDTO curvePointDTOResult = new CurvePointDTO(4,4,4.44,44.44);
+        // WHEN
+        Mockito.when(curvePointRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.of(curvePointFind));
+        Mockito.when(modelBuilder.buildCurvePoint(curvePointDTOofView)).thenReturn(curvePointBuild);
+        Mockito.when(curvePointRepository.save(curvePointBuild)).thenReturn(curvePointResultSave);
+        Mockito.when(dtoBuilder.buildCurvePointDTO(curvePointResultSave)).thenReturn(curvePointDTOResult);
+        // THEN
+        assertThat(curvePointService.updateCurvePoint(curvePointDTOofView, 4)).isEqualTo(curvePointDTOResult);
+    }
+
+    @Test
+    @DisplayName("Test sur deleteCurvePoint with curvePoint not Exist")
+    public void updateCurvePointTestWithCurvePointNotExist(){
+        // GIVEN
+        CurvePointDTO curvePointDTOofView = new CurvePointDTO(4,4.44,44.44);
+        // WHEN
+        Mockito.when(curvePointRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.empty());
+        // THEN
+        assertThrows(DataNotFoundException.class, () -> curvePointService.updateCurvePoint(curvePointDTOofView,any(Integer.class)));
+
+    }
+    //---------- DeleteCurvePointById-----------------------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test sur deleteCurvePoint")
+    public void deleteCurvePointByIdTest(){
         // GIVEN
 
         // WHEN

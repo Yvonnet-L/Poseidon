@@ -2,6 +2,7 @@ package com.nnk.springboot.service.implentation;
 
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.dto.CurvePointDTO;
+import com.nnk.springboot.exceptions.DataNotFoundException;
 import com.nnk.springboot.repositories.CurvePointRepository;
 import com.nnk.springboot.service.interfaces.ICurvePointService;
 import com.nnk.springboot.tool.DtoBuilder;
@@ -78,7 +79,14 @@ public class CurvePointService implements ICurvePointService {
      */
     @Override
     public CurvePointDTO updateCurvePoint(CurvePointDTO curvePointDTO, int id) {
-        return null;
+        logger.info(" ---> Launch updateCurvePoint");
+        CurvePoint curvePointVerif = curvePointRepository.findById(id).orElseThrow(()
+                -> new DataNotFoundException("CurvePoint with id=" + id + " not found in DataBase"));
+        CurvePoint curvePoint = modelBuilder.buildCurvePoint(curvePointDTO);
+        // ajout de l'id
+        curvePoint.setCurveId(id);
+        curvePoint = curvePointRepository.save(curvePoint);
+        return dtoBuilder.buildCurvePointDTO(curvePoint);
     }
     //------------deleteCurvePoint----------------------------------------------------------------------------------
     /**

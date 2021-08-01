@@ -326,3 +326,6 @@
 2021-08-01 17:21:04,401 - [main] INFO       | com.nnk.springboot.controller.BidListController              | --> Launch /bidList/list (BidListController.java:32)
 2021-08-01 18:19:13,139 - [main] INFO       | com.nnk.springboot.service.implentation.CurvePointService    |  ---> Launch getAllCurvePoint (CurvePointService.java:49)
 2021-08-01 22:41:37,293 - [main] INFO       | com.nnk.springboot.service.implentation.CurvePointService    |  ---> Launch addCurvePoint (CurvePointService.java:67)
+2021-08-01 22:58:16,599 - [main] INFO       | com.nnk.springboot.service.implentation.CurvePointService    |  ---> Launch updateCurvePoint (CurvePointService.java:82)
+2021-08-01 23:00:01,595 - [main] INFO       | com.nnk.springboot.service.implentation.CurvePointService    |  ---> Launch updateCurvePoint (CurvePointService.java:82)
+2021-08-01 23:00:01,599 - [main] ERROR      | com.nnk.springboot.exceptions.DataNotFoundException          |   **--> CurvePoint with id=0 not found in DataBase (DataNotFoundException.java:17)
