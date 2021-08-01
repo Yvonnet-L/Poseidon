@@ -69,7 +69,7 @@ public class BidListService implements IBidListService {
         return dtoBuilder.buildUBidListDTO(bidList);
     }
 
-    //------------updateUser-------------------------------------------------------------------------------------
+    //------------updateBidList-------------------------------------------------------------------------------------
     /**
      * Method to update a BidList
      *

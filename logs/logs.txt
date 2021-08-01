@@ -324,3 +324,4 @@
 2021-08-01 17:21:04,395 - [main] INFO       | com.nnk.springboot.controller.BidListController              | --> Launch /bidList/delete/{id} + id: 1 (BidListController.java:80)
 2021-08-01 17:21:04,396 - [main] INFO       | com.nnk.springboot.controller.BidListController              |   --> **  BidList Deleted ** id: 1 (BidListController.java:82)
 2021-08-01 17:21:04,401 - [main] INFO       | com.nnk.springboot.controller.BidListController              | --> Launch /bidList/list (BidListController.java:32)
+2021-08-01 18:19:13,139 - [main] INFO       | com.nnk.springboot.service.implentation.CurvePointService    |  ---> Launch getAllCurvePoint (CurvePointService.java:49)
