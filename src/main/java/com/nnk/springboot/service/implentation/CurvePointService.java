@@ -64,7 +64,9 @@ public class CurvePointService implements ICurvePointService {
      */
     @Override
     public CurvePointDTO addCurvePoint(CurvePointDTO curvePointDTO) {
-        return null;
+        logger.info(" ---> Launch addCurvePoint");
+        CurvePoint curvePoint = curvePointRepository.save(modelBuilder.buildCurvePoint(curvePointDTO));
+        return dtoBuilder.buildCurvePointDTO(curvePoint);
     }
     //------------updateCurvePoint-------------------------------------------------------------------------------------
     /**

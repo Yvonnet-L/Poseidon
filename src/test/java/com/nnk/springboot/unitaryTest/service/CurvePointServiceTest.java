@@ -56,10 +56,16 @@ public class CurvePointServiceTest {
     @DisplayName("Test sur addCurvePoint")
     public void addCurvePointTest(){
         // GIVEN
-        CurvePointDTO curvePointDTOofView = new CurvePointDTO();
+        CurvePointDTO curvePointDTOofView = new CurvePointDTO(4,4.44,44.44);
+        CurvePoint curvePointBuild = new CurvePoint(4,4.44,44.44);
+        CurvePoint curvePointResultSave = new CurvePoint(4,4,4.44,44.44);
+        CurvePointDTO curvePointDTOResult = new CurvePointDTO(4,4,4.44,44.44);
         // WHEN
-
+        Mockito.when(modelBuilder.buildCurvePoint(curvePointDTOofView)).thenReturn(curvePointBuild);
+        Mockito.when(curvePointRepository.save(curvePointBuild)).thenReturn(curvePointResultSave);
+        Mockito.when(dtoBuilder.buildCurvePointDTO(curvePointResultSave)).thenReturn(curvePointDTOResult);
         // THEN
+        assertThat(curvePointService.addCurvePoint(curvePointDTOofView)).isEqualTo(curvePointDTOResult);
 
     }
     //---------- DeleteCurvePoint-----------------------------------------------------------------------------------------------------------------

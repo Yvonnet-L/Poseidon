@@ -32,4 +32,11 @@ public class CurvePointDTO {
     @Digits(fraction = 2, integer = 10)
     private Double value;
 
+    //------------------ Constructor -------------------------------------------------------
+
+    public CurvePointDTO(Integer curveId, Double term, Double value) {
+        this.curveId = curveId;
+        this.term = term;
+        this.value = value;
+    }
 }
