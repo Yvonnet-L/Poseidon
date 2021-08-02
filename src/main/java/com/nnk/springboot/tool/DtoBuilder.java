@@ -73,7 +73,7 @@ private static Logger logger = LogManager.getLogger(DtoBuilder.class);
      * @param rating Rating
      * @return ratingDTO RatingDTO
      */
-    public RatingDTO buildTradeDTO(final Rating rating) {
+    public RatingDTO buildRatingDTO(final Rating rating) {
         return new RatingDTO(rating.getId(), rating.getMoodyRating(),rating.getSandRating(),
                              rating.getFitchRating(), rating.getOrderNumber() );
     }

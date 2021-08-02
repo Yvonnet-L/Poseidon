@@ -1605,4 +1605,3 @@
 2021-08-02 23:09:30,838 - [main] INFO       | org.hibernate.validator.internal.util.Version                | HV000001: Hibernate Validator 6.1.6.Final (Version.java:21)
 2021-08-02 23:10:54,048 - [main] INFO       | org.hibernate.validator.internal.util.Version                | HV000001: Hibernate Validator 6.1.6.Final (Version.java:21)
 2021-08-02 23:59:51,738 - [main] INFO       | com.nnk.springboot.tool.DtoBuilder                           |  ---> Launch buildTrade (ModelBuilder.java:81)
-2021-08-03 00:25:36,378 - [main] INFO       | com.nnk.springboot.service.implentation.RatingService        |  ---> Launch getAllRating (RatingService.java:47)

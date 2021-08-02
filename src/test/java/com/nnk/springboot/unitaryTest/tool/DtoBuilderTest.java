@@ -62,6 +62,6 @@ public class DtoBuilderTest {
         Rating rating= new Rating(1,"moody1","sand1", "fitch1", 10);
         RatingDTO ratingDTO= new RatingDTO(1,"moody1","sand1", "fitch1", 10);
 
-        Assertions.assertThat((dtolBuilder.buildTradeDTO(rating)).equals(ratingDTO));
+        Assertions.assertThat((dtolBuilder.buildRatingDTO(rating)).equals(ratingDTO));
     }
 }
