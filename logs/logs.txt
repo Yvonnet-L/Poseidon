@@ -1611,3 +1611,7 @@
 2021-08-03 00:43:45,003 - [main] INFO       | com.nnk.springboot.service.implentation.RatingService        |  ---> Launch updateRating (RatingService.java:81)
 2021-08-03 00:43:45,007 - [main] ERROR      | com.nnk.springboot.exceptions.DataNotFoundException          |   **--> Rating with id=0 not found in DataBase (DataNotFoundException.java:17)
 2021-08-03 00:43:50,748 - [main] INFO       | com.nnk.springboot.service.implentation.RatingService        |  ---> Launch updateRating (RatingService.java:81)
+2021-08-03 00:48:15,701 - [main] INFO       | com.nnk.springboot.service.implentation.RatingService        |  ---> Launch deleteRating (RatingService.java:97)
+2021-08-03 00:48:15,707 - [main] INFO       | com.nnk.springboot.service.implentation.RatingService        |   ---> ** deleted ** Rating with id: 0 (RatingService.java:101)
+2021-08-03 00:48:20,484 - [main] INFO       | com.nnk.springboot.service.implentation.RatingService        |  ---> Launch deleteRating (RatingService.java:97)
+2021-08-03 00:48:20,489 - [main] ERROR      | com.nnk.springboot.exceptions.DataNotFoundException          |   **--> Rating with id=0 not found in DataBase (DataNotFoundException.java:17)

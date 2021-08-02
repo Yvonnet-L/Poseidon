@@ -100,4 +100,23 @@ public class RatingServiceTest {
         // THEN
         assertThrows(DataNotFoundException.class, () -> ratingService.updateRating(ratingDTOofView,any(Integer.class)));
     }
+    //---------- DeleteRatingeById-----------------------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test sur deleteRating")
+    public void deleteRatingByIdExistTest(){
+        // GIVEN
+        Rating ratingFind = new Rating(1,"mooby1", "sand1" ,"fitch111", 1);
+        // WHEN
+        Mockito.when(ratingRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.of(ratingFind));
+        // THEN
+        ratingService.deleteRating(any(Integer.class));
+    }
+    @Test
+    @DisplayName("Test sur deleteRating")
+    public void deleteRatingByIdNotExistTest(){
+        // WHEN
+        Mockito.when(ratingRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.empty());
+        // THEN
+        assertThrows(DataNotFoundException.class, () -> ratingService.deleteRating(any(Integer.class)));
+    }
 }
