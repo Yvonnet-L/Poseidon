@@ -11,33 +11,36 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 /**
- *  TradeDTO is the object of the view which makes the link with the Trade model
- * @See Trade
+ *  RatingDTO is the object of the view which makes the link with the Rating model
+ * @See Rating
  */
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class TradeDTO {
+public class RatingDTO {
 
-    private Integer tradeId;
-
-    @NotBlank(message = "Account is mandatory")
-    private String account;
+    private Integer id;
 
     @NotBlank(message = "Account is mandatory")
-    private String type;
+    private String moodyRating;
 
-    @Digits( fraction = 2, integer = 10, message="Invalid number ( 10 integer max with 2 fraction max )")
+    @NotBlank(message = "Account is mandatory")
+    private String sandRating;
+
+    @NotBlank(message = "Account is mandatory")
+    private String fitchRating;
+
     @Min(value = 0 , message ="must be positif")
-    private Double buyQuantity;
+    private Integer orderNumber;
 
     //----------Constructor-----------------------------------------------------------------------------------
 
-    public TradeDTO(String account, String type, Double buyQuantity) {
-        this.account = account;
-        this.type = type;
-        this.buyQuantity = buyQuantity;
+    public RatingDTO(String moodyRating, String sandRating, String fitchRating, Integer orderNumber) {
+        this.moodyRating = moodyRating;
+        this.sandRating = sandRating;
+        this.fitchRating = fitchRating;
+        this.orderNumber = orderNumber;
     }
 }

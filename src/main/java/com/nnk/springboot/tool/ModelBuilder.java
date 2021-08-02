@@ -77,4 +77,5 @@ public class ModelBuilder {
         return new Trade(tradeDTO.getAccount(),tradeDTO.getType(), tradeDTO.getBuyQuantity());
     }
     //-------------------------------------------------------------------------------------------
+
 }
