@@ -10,42 +10,43 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
- *  Class DidList which allows the link with the bitList table of the DB
+ *  Class Trade which allows the link with the trade table of the DB
  */
 
+
 @Entity
-@Table(name = "bidlist")
+@Table(name = "trade")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BidList {
+public class Trade {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name = "bid_list_id")
-    private Integer bidListId;
+    @Column(name = "trade_id")
+    private Integer tradeId;
 
     private String account;
 
     private String type;
 
-    @Column(name = "bid_quantity")
-    private Double bidQuantity;
+    @Column(name = "buy_quantity")
+    private Double buyQuantity;
 
-    @Column(name = "ask_quantity")
-    private Double askQuantity;
+    @Column(name = "sell_quantity")
+    private Double sellQuantity;
 
-    private Double bid;
+    @Column(name = "buy_price")
+    private Double buyPrice;
 
-    private Double ask;
+    @Column(name = "sell_price")
+    private Double sellPrice;
 
     private String benchmark;
 
-    @Column(name = "bid_list_date")
-    private LocalDateTime bidListDate;
-
-    private String commentary;
+    @Column(name = "trade_date")
+    private LocalDateTime tradeDate;
 
     private String security;
 
@@ -80,19 +81,4 @@ public class BidList {
 
     //------------------ Constructor -------------------------------------------------------
 
-    public BidList(String account, String type, Double bidQuantity) {
-        this.account = account;
-        this.type = type;
-        this.bidQuantity = bidQuantity;
-    }
-
-    public BidList(Integer bidListId, String account, String type, Double bidQuantity) {
-        this.bidListId = bidListId;
-        this.account = account;
-        this.type = type;
-        this.bidQuantity = bidQuantity;
-    }
-
-    //--------------------------------------------------------------------------------------
-   
 }

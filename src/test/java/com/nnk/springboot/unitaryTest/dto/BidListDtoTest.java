@@ -2,8 +2,6 @@ package com.nnk.springboot.unitaryTest.dto;
 
 import com.nnk.springboot.dto.BidListDTO;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import javax.validation.ConstraintViolation;
