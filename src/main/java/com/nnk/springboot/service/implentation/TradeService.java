@@ -53,10 +53,18 @@ public class TradeService implements ITradeService {
         }
         return tradeDTOList;
     }
-
+    //------------addTrade-------------------------------------------------------------------------------------
+    /**
+     * Method to add a Trade
+     *
+     * @Param  TradeDTO tradeDTO
+     * @return TradeDTO validated return of DB
+     */
     @Override
     public TradeDTO addTrade(TradeDTO tradeDTO) {
-        return null;
+        logger.info(" ---> Launch addTrade");
+        Trade trade = tradeRepository.save(modelBuilder.buildTrade(tradeDTO));
+        return dtoBuilder.buildTradeDTO(trade);
     }
 
     @Override

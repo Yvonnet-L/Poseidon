@@ -1001,3 +1001,4 @@
 2021-08-02 15:47:37,573 - [main] INFO       | org.hibernate.validator.internal.util.Version                | HV000001: Hibernate Validator 6.1.6.Final (Version.java:21)
 2021-08-02 15:47:55,032 - [main] INFO       | org.hibernate.validator.internal.util.Version                | HV000001: Hibernate Validator 6.1.6.Final (Version.java:21)
 2021-08-02 15:56:18,860 - [main] INFO       | com.nnk.springboot.service.implentation.TradeService         |  ---> Launch getAllCurvePoint (TradeService.java:47)
+2021-08-02 17:58:46,670 - [main] INFO       | com.nnk.springboot.service.implentation.TradeService         |  ---> Launch addTrade (TradeService.java:65)

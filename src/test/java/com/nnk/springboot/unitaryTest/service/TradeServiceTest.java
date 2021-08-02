@@ -2,6 +2,8 @@ package com.nnk.springboot.unitaryTest.service;
 
 import com.nnk.springboot.domain.CurvePoint;
 import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.dto.CurvePointDTO;
+import com.nnk.springboot.dto.TradeDTO;
 import com.nnk.springboot.repositories.TradeRepository;
 import com.nnk.springboot.service.implentation.TradeService;
 import com.nnk.springboot.tool.DtoBuilder;
@@ -50,5 +52,20 @@ public class TradeServiceTest {
         // THEN
         assertThat(tradeService.getAllTrade().size()).isEqualTo(3);
     }
-
+    //---------- AddTrade-----------------------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test sur addTrade")
+    public void addCurvePointTest(){
+        // GIVEN
+        TradeDTO tradeDTOofView = new TradeDTO("account4","type4",44.44);
+        Trade tradeBuild = new Trade("account4","type4",44.44);
+        Trade tradeResultSave = new Trade(4,"account4","type4",44.44);
+        TradeDTO tradeDTOResult = new TradeDTO(4,"account4","type4",44.44);
+        // WHEN
+        Mockito.when(modelBuilder.buildTrade(tradeDTOofView)).thenReturn(tradeBuild);
+        Mockito.when(tradeRepository.save(tradeBuild)).thenReturn(tradeResultSave);
+        Mockito.when(dtoBuilder.buildTradeDTO(tradeResultSave)).thenReturn(tradeDTOResult);
+        // THEN
+        assertThat(tradeService.addTrade(tradeDTOofView)).isEqualTo(tradeDTOResult);
+    }
 }
