@@ -119,6 +119,27 @@ public class TradeServiceTest {
         // THEN
         assertThrows(DataNotFoundException.class, () -> tradeService.deleteTrade(any(Integer.class)));
     }
+    //---------- GetTradeById-----------------------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test sur getTradeById with id exist")
+    public void getTradeByIdExistTest(){
+        // GIVEN
+        Trade tradeFind = new Trade(4,"account4","type4",555.44);
+        TradeDTO tradeDTOResult = new TradeDTO(4,"account4","type4",44.44);
+        // WHEN
+        Mockito.when(tradeRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.of(tradeFind));
+        Mockito.when(dtoBuilder.buildTradeDTO(any(Trade.class))).thenReturn(tradeDTOResult);
+        // THEN
+        assertThat(tradeService.getTradeById(any(Integer.class))).isEqualTo(tradeDTOResult);
+    }
 
+    @Test
+    @DisplayName("Test sur getTradeById with id not exist")
+    public void getTradeByIdNotExistTest(){
+        // WHEN
+        Mockito.when(tradeRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.empty());
+        // THEN
+        assertThrows(DataNotFoundException.class, () -> tradeService.getTradeById(any(Integer.class)));
+    }
 
 }
