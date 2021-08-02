@@ -95,7 +95,7 @@ public class TradeControllerTest {
                 .andExpect(view().name("trade/add"))
                 .andReturn();
     }
-    //--------Get----showUpdateForm----/trade/update/{id}------------------------------------------------------------------------------------------------
+    //--------Ge----/trade/update/{id}------------------------------------------------------------------------------------------------
     @Test
     @DisplayName("Test response 200 on showUpdate")
     public void testshowUpdateForm() throws Exception {
@@ -103,5 +103,33 @@ public class TradeControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/trade/update/1"))
                 .andExpect(status().isOk());
     }
-    //--------Post-----updateBid--/bidList/update/{id}------------------------------------------------------------------------------------------------
+    //--------Post-----updateTrade--/Trade/update/{id}------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test response 302/Redirection/Model-hasNoErrors on Post updateBid")
+    public void testUpdateTradeWithBidListDTOConform() throws Exception {
+        Mockito.when(tradeService.updateTrade(trade1DTO,1)).thenReturn(trade1DTO);
+        mockMvc.perform(MockMvcRequestBuilders.post("/trade/update/1")
+                .sessionAttr("trade", trade1DTO)
+                .param("account", trade1DTO.getAccount())
+                .param("type", trade1DTO.getType())
+                .param("buyQuantity", trade1DTO.getBuyQuantity().toString()))
+                .andExpect(model().hasNoErrors())
+                .andExpect(redirectedUrl("/trade/list"))
+                .andExpect(status().is3xxRedirection());
+    }
+
+    @Test
+    @DisplayName("Test Post updateTrade with tradeDTO not conform")
+    public void testUpdateTradeWithBidListDTONotConform() throws Exception {
+        TradeDTO tradeDTONotConform = new TradeDTO("","",0.0);
+        mockMvc.perform(MockMvcRequestBuilders.post("/trade/update/1")
+                .sessionAttr("bid", tradeDTONotConform)
+                .param("account", tradeDTONotConform.getAccount())
+                .param("type", tradeDTONotConform.getType())
+                .param("buyQuantity", tradeDTONotConform.getBuyQuantity().toString()))
+                .andExpect(model().hasErrors())
+                .andExpect(view().name("trade/update"))
+                .andReturn();
+    }
+
 }

@@ -60,14 +60,20 @@ public class TradeController {
     }
     //----------Post-----/trade/update/{id}-------------------------------------------------------------------------------------
     @PostMapping("/trade/update/{id}")
-    public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade,
+    public String updateTrade(@PathVariable("id") Integer id, @Valid TradeDTO tradeDTO,
                               BindingResult result, Model model) {
-
-
-
+        logger.info( "--> Launch Post trade/update/{id} with id: " + id);
+        if(result.hasErrors()){
+            logger.info( "  --> **  Errors ** Nb error: " + result.getErrorCount());
+            model.addAttribute("tradeDTO", tradeDTO);
+            model.addAttribute(id);
+            return "trade/update";
+        }
+        tradeService.updateTrade(tradeDTO, id);
+        logger.info( "  --> **  Trade updated ** id: " + id);
         return "redirect:/trade/list";
     }
-
+    //----------Get----/trade/delete/{id}--------------------------------------------------------------------------------------
     @GetMapping("/trade/delete/{id}")
     public String deleteTrade(@PathVariable("id") Integer id, Model model) {
         // TODO: Find Trade by Id and delete the Trade, return to Trade list
