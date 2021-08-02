@@ -1608,3 +1608,6 @@
 2021-08-03 00:25:36,378 - [main] INFO       | com.nnk.springboot.service.implentation.RatingService        |  ---> Launch getAllRating (RatingService.java:47)
 2021-08-03 00:27:05,490 - [main] INFO       | com.nnk.springboot.service.implentation.RatingService        |  ---> Launch getAllRating (RatingService.java:47)
 2021-08-03 00:34:19,031 - [main] INFO       | com.nnk.springboot.service.implentation.RatingService        |  ---> Launch addTrade (RatingService.java:66)
+2021-08-03 00:43:45,003 - [main] INFO       | com.nnk.springboot.service.implentation.RatingService        |  ---> Launch updateRating (RatingService.java:81)
+2021-08-03 00:43:45,007 - [main] ERROR      | com.nnk.springboot.exceptions.DataNotFoundException          |   **--> Rating with id=0 not found in DataBase (DataNotFoundException.java:17)
+2021-08-03 00:43:50,748 - [main] INFO       | com.nnk.springboot.service.implentation.RatingService        |  ---> Launch updateRating (RatingService.java:81)

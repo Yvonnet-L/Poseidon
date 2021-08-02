@@ -4,6 +4,7 @@ import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.dto.RatingDTO;
 import com.nnk.springboot.dto.TradeDTO;
+import com.nnk.springboot.exceptions.DataNotFoundException;
 import com.nnk.springboot.repositories.RatingRepository;
 import com.nnk.springboot.service.implentation.RatingService;
 import com.nnk.springboot.tool.DtoBuilder;
@@ -20,6 +21,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
 public class RatingServiceTest {
@@ -67,5 +70,34 @@ public class RatingServiceTest {
         Mockito.when(dtoBuilder.buildRatingDTO(ratingResultSave)).thenReturn(ratingDTOResult);
         // THEN
         assertThat(ratingService.addRating(ratingDTOofView)).isEqualTo(ratingDTOResult);
+    }
+    //---------- UpdateRating-----------------------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test sur updateRating")
+    public void updateRatingTest(){
+        // GIVEN
+        RatingDTO ratingDTOofView = new RatingDTO("mooby1", "sand1" ,"fitch1", 1);
+        Rating ratingBuild = new Rating("mooby1", "sand1" ,"fitch1", 1);
+        Rating ratingResultSave = new Rating(1,"mooby1", "sand1" ,"fitch1", 1);
+        Rating ratingFind = new Rating(1,"mooby1", "sand1" ,"fitch111", 1);
+        RatingDTO ratingDTOResult = new RatingDTO(1,"mooby1", "sand1" ,"fitch1", 1);
+        // WHEN
+        Mockito.when(ratingRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.of(ratingFind));
+        Mockito.when(modelBuilder.buildRating(ratingDTOofView)).thenReturn(ratingBuild);
+        Mockito.when(ratingRepository.save(ratingBuild)).thenReturn(ratingResultSave);
+        Mockito.when(dtoBuilder.buildRatingDTO(ratingResultSave)).thenReturn(ratingDTOResult);
+        // THEN
+        assertThat(ratingService.updateRating(ratingDTOofView, 4)).isEqualTo(ratingDTOResult);
+    }
+
+    @Test
+    @DisplayName("Test sur updateRating with trade not Exist")
+    public void updateRatingTestWithCurvePointNotExist(){
+        // GIVEN
+        RatingDTO ratingDTOofView = new RatingDTO("mooby1", "sand1" ,"fitch1", 1);
+        // WHEN
+        Mockito.when(ratingRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.empty());
+        // THEN
+        assertThrows(DataNotFoundException.class, () -> ratingService.updateRating(ratingDTOofView,any(Integer.class)));
     }
 }

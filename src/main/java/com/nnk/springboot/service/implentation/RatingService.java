@@ -3,6 +3,7 @@ package com.nnk.springboot.service.implentation;
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.dto.RatingDTO;
+import com.nnk.springboot.exceptions.DataNotFoundException;
 import com.nnk.springboot.repositories.RatingRepository;
 import com.nnk.springboot.service.interfaces.IRatingService;
 import com.nnk.springboot.tool.DtoBuilder;
@@ -67,10 +68,23 @@ public class RatingService implements IRatingService {
         Rating rating = ratingRepository.save(modelBuilder.buildRating(ratingDTO));
         return dtoBuilder.buildRatingDTO(rating);
     }
-
+    //------------updateRating-------------------------------------------------------------------------------------
+    /**
+     * Method to update a Rating
+     *
+     * @Param  RatingDTO ratingDTO
+     * @Param  int id ( id of Rating )
+     * @return RatingDTO validated return of DB
+     */
     @Override
     public RatingDTO updateRating(RatingDTO ratingDTO, int id) {
-        return null;
+        logger.info(" ---> Launch updateRating");
+        Rating ratingFind = ratingRepository.findById(id).orElseThrow(()
+                -> new DataNotFoundException("Rating with id=" + id + " not found in DataBase"));
+        Rating rating = modelBuilder.buildRating(ratingDTO);
+        rating.setId(id);
+        rating = ratingRepository.save(rating);
+        return dtoBuilder.buildRatingDTO(rating);
     }
 
     @Override
