@@ -1,6 +1,7 @@
 package com.nnk.springboot.controller;
 
 import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.dto.BidListDTO;
 import com.nnk.springboot.dto.TradeDTO;
 import com.nnk.springboot.service.interfaces.ITradeService;
 import org.apache.logging.log4j.LogManager;
@@ -52,15 +53,18 @@ public class TradeController {
     //----------Get-----/trade/update/{id}----------------------------------------------------------
     @GetMapping("/trade/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-
-
+        logger.info( "--> Launch /trade/update/{id} with id: " + id);
+        TradeDTO tradeDTO = tradeService.getTradeById(id);
+        model.addAttribute("tradeDTO", tradeDTO);
         return "trade/update";
     }
-
+    //----------Post-----/trade/update/{id}-------------------------------------------------------------------------------------
     @PostMapping("/trade/update/{id}")
     public String updateTrade(@PathVariable("id") Integer id, @Valid Trade trade,
                               BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Trade and return Trade list
+
+
+
         return "redirect:/trade/list";
     }
 

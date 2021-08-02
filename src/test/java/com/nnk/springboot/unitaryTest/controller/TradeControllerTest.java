@@ -95,4 +95,13 @@ public class TradeControllerTest {
                 .andExpect(view().name("trade/add"))
                 .andReturn();
     }
+    //--------Get----showUpdateForm----/trade/update/{id}------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test response 200 on showUpdate")
+    public void testshowUpdateForm() throws Exception {
+        Mockito.when(tradeService.getTradeById(any(Integer.class))).thenReturn(trade1DTO);
+        mockMvc.perform(MockMvcRequestBuilders.get("/trade/update/1"))
+                .andExpect(status().isOk());
+    }
+    //--------Post-----updateBid--/bidList/update/{id}------------------------------------------------------------------------------------------------
 }
