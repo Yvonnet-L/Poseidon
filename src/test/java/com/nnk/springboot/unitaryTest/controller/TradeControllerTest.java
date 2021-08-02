@@ -131,5 +131,12 @@ public class TradeControllerTest {
                 .andExpect(view().name("trade/update"))
                 .andReturn();
     }
-
+    //--------Get------/bidList/delete/{id}---------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test Get deleteTrade responce Ok/redirect")
+    public void testDeleteTrade() throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders.get("/trade/delete/1"))
+                .andExpect(redirectedUrl("/trade/list"))
+                .andExpect(status().is3xxRedirection());
+    }
 }

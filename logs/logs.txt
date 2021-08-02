@@ -1311,3 +1311,6 @@
 2021-08-02 22:22:08,189 - [background-preinit] INFO       | org.hibernate.validator.internal.util.Version                | HV000001: Hibernate Validator 6.1.6.Final (Version.java:21)
 2021-08-02 22:22:10,262 - [main] INFO       | com.nnk.springboot.controller.TradeController                | --> Launch Post trade/update/{id} with id: 1 (TradeController.java:65)
 2021-08-02 22:22:10,263 - [main] INFO       | com.nnk.springboot.controller.TradeController                |   --> **  Errors ** Nb error: 2 (TradeController.java:67)
+2021-08-02 22:25:09,716 - [background-preinit] INFO       | org.hibernate.validator.internal.util.Version                | HV000001: Hibernate Validator 6.1.6.Final (Version.java:21)
+2021-08-02 22:25:11,781 - [main] INFO       | com.nnk.springboot.controller.TradeController                | --> Launch /trade/delete/{id} + id: 1 (TradeController.java:79)
+2021-08-02 22:25:11,790 - [main] INFO       | com.nnk.springboot.controller.TradeController                |   --> **  Trade Deleted ** id: 1 (TradeController.java:81)

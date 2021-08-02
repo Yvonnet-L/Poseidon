@@ -76,7 +76,9 @@ public class TradeController {
     //----------Get----/trade/delete/{id}--------------------------------------------------------------------------------------
     @GetMapping("/trade/delete/{id}")
     public String deleteTrade(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Trade by Id and delete the Trade, return to Trade list
+        logger.info( "--> Launch /trade/delete/{id} + id: " + id );
+        tradeService.deleteTrade(id);
+        logger.info( "  --> **  Trade Deleted ** id: " + id);
         return "redirect:/trade/list";
     }
 }
