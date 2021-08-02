@@ -3,9 +3,11 @@ package com.nnk.springboot.tool;
 
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.CurvePoint;
+import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.dto.BidListDTO;
 import com.nnk.springboot.dto.CurvePointDTO;
+import com.nnk.springboot.dto.TradeDTO;
 import com.nnk.springboot.dto.UserDTO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -58,6 +60,17 @@ private static Logger logger = LogManager.getLogger(DtoBuilder.class);
 
         return new CurvePointDTO(curvePoint.getId(), curvePoint.getCurveId(),
                 curvePoint.getTerm(), curvePoint.getValue());
+    }
+    //-----------------TradeDTO-----------------------------------------------------------------------
+    /**
+     *  Build CurvePointDTO with CurvePoint
+     *
+     * @param trade Trade
+     * @return tradeDTO TradeDTO
+     */
+    public TradeDTO buildTradeDTO(final Trade trade) {
+        return new TradeDTO(trade.getTradeId(), trade.getAccount(),
+                                trade.getType(), trade.getBuyQuantity());
     }
     //-------------------------------------------------------------------------------------------
 

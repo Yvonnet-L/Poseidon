@@ -44,7 +44,7 @@ public class CurvePointServiceTest {
     @DisplayName("Test sur getAllCurvePoint")
     public void getAllCurvePointTest(){
         // GIVEN
-        CurvePoint curvePoint1 = new CurvePoint( 1, 1, 11.11, 11.11);
+        CurvePoint curvePoint1 = new CurvePoint(1,1,11.11, 1.11);
         CurvePoint curvePoint2 = new CurvePoint(2,2,2.22,2.22);
         CurvePoint curvePoint3 = new CurvePoint(3,3,3.33,3.33);
         curvePointList = Arrays.asList(curvePoint1, curvePoint2, curvePoint3);

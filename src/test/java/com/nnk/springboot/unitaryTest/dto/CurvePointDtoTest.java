@@ -27,10 +27,10 @@ public class CurvePointDtoTest {
     @Test
     public void CurvePointDtoAllPasramsGoodTest() {
         // GIVEN
-        CurvePointDTO CurvePointDTO = new CurvePointDTO(1 , 12, 12.32, 1.11);
+        CurvePointDTO curvePointDTO = new CurvePointDTO(1 , 12, 12.32, 1.11);
         // WHEN
         Set<ConstraintViolation<CurvePointDTO>> constraintViolations =
-                validator.validate(CurvePointDTO);
+                validator.validate(curvePointDTO);
         // THEN
         assertEquals(0, constraintViolations.size());
     }
@@ -38,21 +38,21 @@ public class CurvePointDtoTest {
     @Test
     public void AllNullTest() {
         // GIVEN
-        CurvePointDTO CurvePointDTO = new CurvePointDTO(null , null, null, null);
+        CurvePointDTO curvePointDTO = new CurvePointDTO(null , null, null, null);
         // WHEN
         Set<ConstraintViolation<CurvePointDTO>> constraintViolations =
-                validator.validate(CurvePointDTO);
+                validator.validate(curvePointDTO);
         // THEN
         assertEquals(3, constraintViolations.size());
     }
-    //---------- All Empty ---------------------------------------------------------------------------------
+    //---------- Not Conform ---------------------------------------------------------------------------------
     @Test
     public void ParamsNotCorrectTest() {
         // GIVEN
-        CurvePointDTO CurvePointDTO = new CurvePointDTO(1 , 2, 15.566, 12345678901.45);
+        CurvePointDTO curvePointDTO = new CurvePointDTO(1 , 2, 15.566, 12345678901.45);
         // WHEN
         Set<ConstraintViolation<CurvePointDTO>> constraintViolations =
-                validator.validate(CurvePointDTO);
+                validator.validate(curvePointDTO);
         // THEN
         assertEquals(2, constraintViolations.size());
     }

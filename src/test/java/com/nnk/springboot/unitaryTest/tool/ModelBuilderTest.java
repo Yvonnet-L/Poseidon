@@ -2,11 +2,14 @@ package com.nnk.springboot.unitaryTest.tool;
 
 import com.nnk.springboot.domain.BidList;
 import com.nnk.springboot.domain.CurvePoint;
+import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.dto.BidListDTO;
 import com.nnk.springboot.dto.CurvePointDTO;
+import com.nnk.springboot.dto.TradeDTO;
 import com.nnk.springboot.dto.UserDTO;
 import com.nnk.springboot.tool.ModelBuilder;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -45,10 +48,19 @@ public class ModelBuilderTest {
     @Test
     @DisplayName("CurvePoint Builder Test")
     public void builderCurvePointTest(){
-        CurvePoint curvePoint= new CurvePoint(1,2, 12.56, 45.50);
-        CurvePointDTO curvePointDTO = new CurvePointDTO(1,2, 12.56, 45.50);
+        CurvePoint curvePoint= new CurvePoint(2, 12.56, 45.50);
+        CurvePointDTO curvePointDTO = new CurvePointDTO(2, 12.56, 45.50);
 
         assertThat((modelBuilder.buildCurvePoint(curvePointDTO)).equals(curvePoint));
 
+    }
+    //-----------------Trade--------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Trade Builder Test")
+    public void buildTradeTest(){
+        Trade trade= new Trade("account1", "type1", 11.11);
+        TradeDTO tradeDTO= new TradeDTO("account1", "type1", 11.11);
+
+        Assertions.assertThat((modelBuilder.buildTrade(tradeDTO)).equals(trade));
     }
 }

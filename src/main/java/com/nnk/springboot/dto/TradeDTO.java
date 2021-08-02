@@ -35,6 +35,10 @@ public class TradeDTO {
     private Double buyQuantity;
 
     //----------Constructor-----------------------------------------------------------------------------------
-    
 
+    public TradeDTO(String account, String type, Double buyQuantity) {
+        this.account = account;
+        this.type = type;
+        this.buyQuantity = buyQuantity;
+    }
 }

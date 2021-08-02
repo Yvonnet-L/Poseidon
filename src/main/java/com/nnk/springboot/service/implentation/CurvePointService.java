@@ -16,10 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  CurvePointServiceService
+ *  CurvePointService
  *
  * @See CurvePoint
- * @See CurvePointtDTO
+ * @See CurvePointDTO
  * @See DtoBuilder
  * @See ModelBuilder
  */
