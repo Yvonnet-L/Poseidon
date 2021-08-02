@@ -49,7 +49,7 @@ public class TradeControllerTest {
     }
     //---------Get----getTrades------/trade/list------------------------------------------------------------------------------------------
     @Test
-    @DisplayName("Test response 200 on getBidLists")
+    @DisplayName("Test response 200 on getTrades")
     public void testGetTrades() throws Exception {
         Mockito.when(tradeService.getAllTrade()).thenReturn(Arrays.asList(trade1DTO, trade2DTO));
         mockMvc.perform(MockMvcRequestBuilders.get("/trade/list"))
@@ -57,6 +57,13 @@ public class TradeControllerTest {
                 .andExpect(view().name("trade/list"))
                 .andExpect(status().isOk());
     }
-
+    //---------Get----addTrade------/trade/add"-----------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test response 200 on addTrade")
+    public void testAddTrade() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/trade/add"))
+                .andExpect(view().name("trade/add"))
+                .andExpect(status().isOk());
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.nnk.springboot.controller;
 
 import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.dto.TradeDTO;
 import com.nnk.springboot.service.interfaces.ITradeService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,15 +31,18 @@ public class TradeController {
         model.addAttribute("trades", tradeService.getAllTrade());
         return "trade/list";
     }
-
+    //----------Get------/trade/add-----------------------------------------------------------
     @GetMapping("/trade/add")
-    public String addUser(Trade bid) {
+    public String addTrade(TradeDTO tradeDTO) {
+        logger.info( "--> Launch /trade/add" );
         return "trade/add";
     }
-
+    //---------Post-----/trade/validate----------------------------------------------------------
     @PostMapping("/trade/validate")
-    public String validate(@Valid Trade trade, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Trade list
+    public String validate(@Valid TradeDTO tradeDTO, BindingResult result, Model model) {
+
+
+
         return "trade/add";
     }
 
