@@ -3,6 +3,7 @@ package com.nnk.springboot.unitaryTest.controller;
 
 import com.nnk.springboot.controller.BidListController;
 import com.nnk.springboot.controller.TradeController;
+import com.nnk.springboot.dto.BidListDTO;
 import com.nnk.springboot.dto.TradeDTO;
 import com.nnk.springboot.service.implentation.TradeService;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +23,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Arrays;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
@@ -65,5 +67,32 @@ public class TradeControllerTest {
                 .andExpect(view().name("trade/add"))
                 .andExpect(status().isOk());
     }
+    //---------Post----validate------/trade/validate"-------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test response 302/Redirection/Model-hasNoErrors on Post validate")
+    public void testValidateWithTradeDtoWithAllParamsOk() throws Exception {
+        Mockito.when(tradeService.addTrade(any(TradeDTO.class))).thenReturn(trade1DTO);
+        mockMvc.perform(MockMvcRequestBuilders.post("/trade/validate")
+                .sessionAttr("trade", trade1DTO)
+                .param("account", trade1DTO.getAccount())
+                .param("type", trade1DTO.getType())
+                .param("buyQuantity", trade1DTO.getBuyQuantity().toString()))
+                .andExpect(model().hasNoErrors())
+                .andExpect(redirectedUrl("/trade/list"))
+                .andExpect(status().is3xxRedirection());
+    }
 
+    @Test
+    @DisplayName("Test Post validate with tradeDTO not conform")
+    public void testValidateWithTradeDtoWithParamsEmpty() throws Exception {
+        TradeDTO tradeDTONotConform = new TradeDTO("","",0.0);
+        mockMvc.perform(MockMvcRequestBuilders.post("/trade/validate")
+                .sessionAttr("trade", tradeDTONotConform)
+                .param("account", tradeDTONotConform.getAccount())
+                .param("type", tradeDTONotConform.getType())
+                .param("buyQuantity", tradeDTONotConform.getBuyQuantity().toString()))
+                .andExpect(model().hasErrors())
+                .andExpect(view().name("trade/add"))
+                .andReturn();
+    }
 }

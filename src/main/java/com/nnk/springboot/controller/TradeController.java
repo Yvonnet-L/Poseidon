@@ -40,15 +40,20 @@ public class TradeController {
     //---------Post-----/trade/validate----------------------------------------------------------
     @PostMapping("/trade/validate")
     public String validate(@Valid TradeDTO tradeDTO, BindingResult result, Model model) {
-
-
-
-        return "trade/add";
+        logger.info( "--> Launch /trade/validate");
+        if(result.hasErrors()){
+            logger.info( "  --> **  Errors ** Nb error: " + result.getErrorCount());
+            return "trade/add";
+        }
+        tradeService.addTrade(tradeDTO);
+        logger.info( "  --> **  Trade saved **");
+        return "redirect:/trade/list";
     }
-
+    //----------Get-----/trade/update/{id}----------------------------------------------------------
     @GetMapping("/trade/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get Trade by Id and to model then show to the form
+
+
         return "trade/update";
     }
 
