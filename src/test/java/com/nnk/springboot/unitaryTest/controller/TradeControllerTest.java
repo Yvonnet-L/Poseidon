@@ -1,9 +1,7 @@
 package com.nnk.springboot.unitaryTest.controller;
 
 
-import com.nnk.springboot.controller.BidListController;
 import com.nnk.springboot.controller.TradeController;
-import com.nnk.springboot.dto.BidListDTO;
 import com.nnk.springboot.dto.TradeDTO;
 import com.nnk.springboot.service.implentation.TradeService;
 import org.junit.jupiter.api.BeforeEach;

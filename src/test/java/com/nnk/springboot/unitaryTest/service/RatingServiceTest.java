@@ -1,9 +1,7 @@
 package com.nnk.springboot.unitaryTest.service;
 
 import com.nnk.springboot.domain.Rating;
-import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.dto.RatingDTO;
-import com.nnk.springboot.dto.TradeDTO;
 import com.nnk.springboot.exceptions.DataNotFoundException;
 import com.nnk.springboot.repositories.RatingRepository;
 import com.nnk.springboot.service.implentation.RatingService;
