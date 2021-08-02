@@ -91,7 +91,7 @@ public class CurvePointServiceTest {
     }
 
     @Test
-    @DisplayName("Test sur deleteCurvePoint with curvePoint not Exist")
+    @DisplayName("Test sur updateCurvePoint with curvePoint not Exist")
     public void updateCurvePointTestWithCurvePointNotExist(){
         // GIVEN
         CurvePointDTO curvePointDTOofView = new CurvePointDTO(4,4.44,44.44);

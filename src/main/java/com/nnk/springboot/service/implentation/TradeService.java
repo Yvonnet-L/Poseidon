@@ -2,6 +2,7 @@ package com.nnk.springboot.service.implentation;
 
 import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.dto.TradeDTO;
+import com.nnk.springboot.exceptions.DataNotFoundException;
 import com.nnk.springboot.repositories.TradeRepository;
 import com.nnk.springboot.service.interfaces.ITradeService;
 import com.nnk.springboot.tool.DtoBuilder;
@@ -66,10 +67,23 @@ public class TradeService implements ITradeService {
         Trade trade = tradeRepository.save(modelBuilder.buildTrade(tradeDTO));
         return dtoBuilder.buildTradeDTO(trade);
     }
-
+    //------------updateTrade-------------------------------------------------------------------------------------
+    /**
+     * Method to update a Trade
+     *
+     * @Param  TradeDTO tradeDTO
+     * @Param  int id ( id of Trade )
+     * @return TradeDTO validated return of DB
+     */
     @Override
     public TradeDTO updateTrade(TradeDTO tradeDTO, int id) {
-        return null;
+        logger.info(" ---> Launch updateTrade");
+        Trade tradeFind = tradeRepository.findById(id).orElseThrow(()
+                -> new DataNotFoundException("Trade with id=" + id + " not found in DataBase"));
+        Trade trade = modelBuilder.buildTrade(tradeDTO);
+        trade.setTradeId(id);
+        trade = tradeRepository.save(trade);
+        return dtoBuilder.buildTradeDTO(trade);
     }
 
     @Override
