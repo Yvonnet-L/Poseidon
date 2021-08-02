@@ -1,13 +1,7 @@
 package com.nnk.springboot.unitaryTest.tool;
 
-import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.domain.Trade;
-import com.nnk.springboot.domain.User;
-import com.nnk.springboot.dto.BidListDTO;
-import com.nnk.springboot.dto.CurvePointDTO;
-import com.nnk.springboot.dto.TradeDTO;
-import com.nnk.springboot.dto.UserDTO;
+import com.nnk.springboot.domain.*;
+import com.nnk.springboot.dto.*;
 import com.nnk.springboot.tool.ModelBuilder;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -63,4 +57,16 @@ public class ModelBuilderTest {
 
         Assertions.assertThat((modelBuilder.buildTrade(tradeDTO)).equals(trade));
     }
+    //-----------------Rating--------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Rating Builder Test")
+    public void buildRatingTest(){
+        Rating rating= new Rating("moody1","sand1", "fitch1", 10);
+        RatingDTO ratingDTO= new RatingDTO("moody1","sand1", "fitch1", 10);
+
+        Assertions.assertThat((modelBuilder.buildRating(ratingDTO)).equals(rating));
+    }
+
+
+
 }

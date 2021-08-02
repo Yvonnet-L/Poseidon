@@ -1,13 +1,7 @@
 package com.nnk.springboot.unitaryTest.tool;
 
-import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.domain.Trade;
-import com.nnk.springboot.domain.User;
-import com.nnk.springboot.dto.BidListDTO;
-import com.nnk.springboot.dto.CurvePointDTO;
-import com.nnk.springboot.dto.TradeDTO;
-import com.nnk.springboot.dto.UserDTO;
+import com.nnk.springboot.domain.*;
+import com.nnk.springboot.dto.*;
 import com.nnk.springboot.tool.DtoBuilder;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -57,8 +51,17 @@ public class DtoBuilderTest {
     @DisplayName("TradetDTO Builder Test")
     public void buildTradeTest(){
         Trade trade= new Trade(1,"account1", "type1", 11.11);
-        TradeDTO tradeSTO= new TradeDTO(1,"account1", "type1", 11.11);
+        TradeDTO tradeDTO= new TradeDTO(1,"account1", "type1", 11.11);
 
-        Assertions.assertThat((dtolBuilder.buildTradeDTO(trade)).equals(tradeSTO));
+        Assertions.assertThat((dtolBuilder.buildTradeDTO(trade)).equals(tradeDTO));
+    }
+    //-----------------RatingDTO--------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("RatingDTO Builder Test")
+    public void buildRatingTest(){
+        Rating rating= new Rating(1,"moody1","sand1", "fitch1", 10);
+        RatingDTO ratingDTO= new RatingDTO(1,"moody1","sand1", "fitch1", 10);
+
+        Assertions.assertThat((dtolBuilder.buildTradeDTO(rating)).equals(ratingDTO));
     }
 }

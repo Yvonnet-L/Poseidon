@@ -1,14 +1,8 @@
 package com.nnk.springboot.tool;
 
 
-import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.domain.Trade;
-import com.nnk.springboot.domain.User;
-import com.nnk.springboot.dto.BidListDTO;
-import com.nnk.springboot.dto.CurvePointDTO;
-import com.nnk.springboot.dto.TradeDTO;
-import com.nnk.springboot.dto.UserDTO;
+import com.nnk.springboot.domain.*;
+import com.nnk.springboot.dto.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
@@ -66,15 +60,27 @@ public class ModelBuilder {
     }
     //--------------build-Trade---------------------------------------------------------------------------
     /**
-     *  Build CurvePoint with CurvePointDTO
+     *  Build Trade with TradeDTO
      *
-     * @param  tradeDTO TradetDTO
+     * @param  tradeDTO TradeDTO
      * @return trade Trade
      */
     public Trade buildTrade(final TradeDTO tradeDTO) {
         logger.info( " ---> Launch buildTrade");
 
         return new Trade(tradeDTO.getAccount(),tradeDTO.getType(), tradeDTO.getBuyQuantity());
+    }
+    //--------------build-Rating---------------------------------------------------------------------------
+    /**
+     *  Build CurvePoint with CurvePointDTO
+     *
+     * @param  ratingDTO RatingDTO
+     * @return rating Rating
+     */
+    public Rating buildRating(final RatingDTO ratingDTO) {
+        logger.info( " ---> Launch buildTrade");
+        return new Rating(ratingDTO.getMoodyRating(),ratingDTO.getSandRating(), ratingDTO.getFitchRating(),
+                       ratingDTO.getOrderNumber() );
     }
     //-------------------------------------------------------------------------------------------
 

@@ -1,14 +1,8 @@
 package com.nnk.springboot.tool;
 
 
-import com.nnk.springboot.domain.BidList;
-import com.nnk.springboot.domain.CurvePoint;
-import com.nnk.springboot.domain.Trade;
-import com.nnk.springboot.domain.User;
-import com.nnk.springboot.dto.BidListDTO;
-import com.nnk.springboot.dto.CurvePointDTO;
-import com.nnk.springboot.dto.TradeDTO;
-import com.nnk.springboot.dto.UserDTO;
+import com.nnk.springboot.domain.*;
+import com.nnk.springboot.dto.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
@@ -71,6 +65,17 @@ private static Logger logger = LogManager.getLogger(DtoBuilder.class);
     public TradeDTO buildTradeDTO(final Trade trade) {
         return new TradeDTO(trade.getTradeId(), trade.getAccount(),
                                 trade.getType(), trade.getBuyQuantity());
+    }
+    //-----------------RatingDTO-----------------------------------------------------------------------
+    /**
+     *  Build RatingDTO with Rating
+     *
+     * @param rating Rating
+     * @return ratingDTO RatingDTO
+     */
+    public RatingDTO buildTradeDTO(final Rating rating) {
+        return new RatingDTO(rating.getId(), rating.getMoodyRating(),rating.getSandRating(),
+                             rating.getFitchRating(), rating.getOrderNumber() );
     }
     //-------------------------------------------------------------------------------------------
 
