@@ -1,6 +1,7 @@
 package com.nnk.springboot.service.implentation;
 
 import com.nnk.springboot.domain.Rating;
+import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.dto.RatingDTO;
 import com.nnk.springboot.repositories.RatingRepository;
 import com.nnk.springboot.service.interfaces.IRatingService;
@@ -53,10 +54,18 @@ public class RatingService implements IRatingService {
         }
         return ratingDTOList;
     }
-
+    //------------addRating-------------------------------------------------------------------------------------
+    /**
+     * Method to add a Rating
+     *
+     * @Param  RatingDTO ratingDTO
+     * @return RatingDTO validated return of DB
+     */
     @Override
     public RatingDTO addRating(RatingDTO ratingDTO) {
-        return null;
+        logger.info(" ---> Launch addTrade");
+        Rating rating = ratingRepository.save(modelBuilder.buildRating(ratingDTO));
+        return dtoBuilder.buildRatingDTO(rating);
     }
 
     @Override

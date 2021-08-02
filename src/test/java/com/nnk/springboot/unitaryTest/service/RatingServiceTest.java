@@ -2,6 +2,8 @@ package com.nnk.springboot.unitaryTest.service;
 
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.domain.Trade;
+import com.nnk.springboot.dto.RatingDTO;
+import com.nnk.springboot.dto.TradeDTO;
 import com.nnk.springboot.repositories.RatingRepository;
 import com.nnk.springboot.service.implentation.RatingService;
 import com.nnk.springboot.tool.DtoBuilder;
@@ -36,10 +38,10 @@ public class RatingServiceTest {
 
     private List<Rating> ratingList;
 
-    //---------- GetAllTrade-----------------------------------------------------------------------------------------------------------------
+    //---------- GetAllRating-----------------------------------------------------------------------------------------------------------------
     @Test
-    @DisplayName("Test sur getAllTrade")
-    public void getAllTradeTest(){
+    @DisplayName("Test sur getAllRating")
+    public void getAllRatingTest(){
         // GIVEN
         Rating rating1 = new Rating(1,"mooby1", "sand1" ,"fitch1", 1);
         Rating rating2 = new Rating(2,"mooby2", "sand2" ,"fitch2", 2);
@@ -50,5 +52,20 @@ public class RatingServiceTest {
         // THEN
         assertThat(ratingService.getAllRating().size()).isEqualTo(3);
     }
-
+    //---------- AddRating-----------------------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test sur addRating")
+    public void addRatingTest(){
+        // GIVEN
+        RatingDTO ratingDTOofView = new RatingDTO("mooby1", "sand1" ,"fitch1", 1);
+        Rating ratingBuild = new Rating("mooby1", "sand1" ,"fitch1", 1);
+        Rating ratingResultSave = new Rating(1,"mooby1", "sand1" ,"fitch1", 1);
+        RatingDTO ratingDTOResult = new RatingDTO(1,"mooby1", "sand1" ,"fitch1", 1);
+        // WHEN
+        Mockito.when(modelBuilder.buildRating(ratingDTOofView)).thenReturn(ratingBuild);
+        Mockito.when(ratingRepository.save(ratingBuild)).thenReturn(ratingResultSave);
+        Mockito.when(dtoBuilder.buildRatingDTO(ratingResultSave)).thenReturn(ratingDTOResult);
+        // THEN
+        assertThat(ratingService.addRating(ratingDTOofView)).isEqualTo(ratingDTOResult);
+    }
 }
