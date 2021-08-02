@@ -100,9 +100,18 @@ public class RatingService implements IRatingService {
         ratingRepository.deleteById(id);
         logger.info("  ---> ** deleted ** Rating with id: " + id);
     }
-
+    //------------getRatingById----------------------------------------------------------------------------------
+    /**
+     * Void to get Rating with id
+     *
+     * @Param  int id of Rating
+     */
     @Override
     public RatingDTO getRatingById(int id) {
-        return null;
+        logger.info(" ---> Launch getRatingById");
+        Rating ratingFind = ratingRepository.findById(id).orElseThrow(()
+                -> new DataNotFoundException("Rating with id=" + id + " not found in DataBase"));
+        logger.info("  ---> ** find ** Rating with id: " + id);
+        return dtoBuilder.buildRatingDTO(ratingFind);
     }
 }
