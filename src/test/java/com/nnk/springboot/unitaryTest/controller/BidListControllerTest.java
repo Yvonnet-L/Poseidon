@@ -66,13 +66,13 @@ public class BidListControllerTest {
                 .andExpect(status().isOk());
     }
 
-    //---------Get----validate------/bidList/validate"-------------------------------------------------------------------------------------------------
+    //---------Post----validate------/bidList/validate"-------------------------------------------------------------------------------------------------
     @Test
     @DisplayName("Test response 302/Redirection/Model-hasNoErrors on Post validate")
     public void testValidateWithBilistDtoWithAllParamsOk() throws Exception {
         Mockito.when(bidListService.addBidList(bidList1DTO)).thenReturn(bidList1DTO);
         mockMvc.perform(MockMvcRequestBuilders.post("/bidList/validate")
-                .sessionAttr("userDTO", bidList1DTO)
+                .sessionAttr("bid", bidList1DTO)
                 .param("account", bidList1DTO.getAccount())
                 .param("type", bidList1DTO.getType())
                 .param("bidQuantity", bidList1DTO.getBidQuantity().toString()))
@@ -86,7 +86,7 @@ public class BidListControllerTest {
     public void testValidateWithBilistDtoWithParamsEmpty() throws Exception {
         BidListDTO bidListDTONotConform = new BidListDTO("","",0.0);
         mockMvc.perform(MockMvcRequestBuilders.post("/bidList/validate")
-                .sessionAttr("userDTO", bidListDTONotConform)
+                .sessionAttr("bid", bidListDTONotConform)
                 .param("account", bidListDTONotConform.getAccount())
                 .param("type", bidListDTONotConform.getType())
                 .param("bidQuantity", bidListDTONotConform.getBidQuantity().toString()))
@@ -102,13 +102,13 @@ public class BidListControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/bidList/update/1"))
                 .andExpect(status().isOk());
     }
-    //--------Post-----updateBid--/user/update/{id}------------------------------------------------------------------------------------------------
+    //--------Post-----updateBid--/bidList/update/{id}------------------------------------------------------------------------------------------------
     @Test
     @DisplayName("Test response 302/Redirection/Model-hasNoErrors on Post updateBid")
     public void testUpdateBidWithBidListDTOConform() throws Exception {
         Mockito.when(bidListService.updateBidList(bidList1DTO,1)).thenReturn(bidList1DTO);
         mockMvc.perform(MockMvcRequestBuilders.post("/bidList/update/1")
-                .sessionAttr("userDTO", bidList1DTO)
+                .sessionAttr("bid", bidList1DTO)
                 .param("account", bidList1DTO.getAccount())
                 .param("type", bidList1DTO.getType())
                 .param("bidQuantity", bidList1DTO.getBidQuantity().toString()))
@@ -122,7 +122,7 @@ public class BidListControllerTest {
     public void testUpdateBidWithBidListDTONotConform() throws Exception {
         BidListDTO bidListDTONotConform = new BidListDTO("","",0.0);
         mockMvc.perform(MockMvcRequestBuilders.post("/bidList/update/1")
-                .sessionAttr("userDTO", bidListDTONotConform)
+                .sessionAttr("bid", bidListDTONotConform)
                 .param("account", bidListDTONotConform.getAccount())
                 .param("type", bidListDTONotConform.getType())
                 .param("bidQuantity", bidListDTONotConform.getBidQuantity().toString()))
@@ -131,7 +131,7 @@ public class BidListControllerTest {
                 .andReturn();
     }
 
-    //--------Get------/user/delete/{id}---------------------------------------------------------------------------------------------
+    //--------Get------/bidList/delete/{id}---------------------------------------------------------------------------------------------
 
     @Test
     @DisplayName("Test Get deleteBid responce Ok/redirect")
