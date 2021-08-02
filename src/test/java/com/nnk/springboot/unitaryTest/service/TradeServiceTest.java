@@ -100,4 +100,25 @@ public class TradeServiceTest {
         // THEN
         assertThrows(DataNotFoundException.class, () -> tradeService.updateTrade(tradeDTOofView,any(Integer.class)));
     }
+    //---------- DeleteTradeById-----------------------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test sur deleteTrade")
+    public void deleteTradeByIdExistTest(){
+        // GIVEN
+        Trade tradeFind = new Trade(4,"account4","type4",555.44);
+        // WHEN
+        Mockito.when(tradeRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.of(tradeFind));
+        // THEN
+        tradeService.deleteTrade(any(Integer.class));
+    }
+    @Test
+    @DisplayName("Test sur deleteCurvePoint")
+    public void deleteCurvePointByIdNotExistTest(){
+        // WHEN
+        Mockito.when(tradeRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.empty());
+        // THEN
+        assertThrows(DataNotFoundException.class, () -> tradeService.deleteTrade(any(Integer.class)));
+    }
+
+
 }

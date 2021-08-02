@@ -85,10 +85,19 @@ public class TradeService implements ITradeService {
         trade = tradeRepository.save(trade);
         return dtoBuilder.buildTradeDTO(trade);
     }
-
+    //------------deleteCurvePoint----------------------------------------------------------------------------------
+    /**
+     * Void to delete Trade with id
+     *
+     * @Param  int id of Trade
+     */
     @Override
     public void deleteTrade(int id) {
-
+        logger.info(" ---> Launch deleteTrade");
+        Trade tradeFind = tradeRepository.findById(id).orElseThrow(()
+                -> new DataNotFoundException("Trade with id=" + id + " not found in DataBase"));
+        tradeRepository.deleteById(id);
+        logger.info("  ---> ** deleted ** Trade with id: " + id);
     }
 
     @Override

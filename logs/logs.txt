@@ -1010,3 +1010,7 @@
 2021-08-02 18:24:56,443 - [main] INFO       | com.nnk.springboot.service.implentation.TradeService         |  ---> Launch updateTrade (TradeService.java:80)
 2021-08-02 18:27:40,837 - [main] INFO       | com.nnk.springboot.service.implentation.TradeService         |  ---> Launch updateTrade (TradeService.java:80)
 2021-08-02 18:27:40,841 - [main] ERROR      | com.nnk.springboot.exceptions.DataNotFoundException          |   **--> Trade with id=0 not found in DataBase (DataNotFoundException.java:17)
+2021-08-02 18:34:16,343 - [main] INFO       | com.nnk.springboot.service.implentation.TradeService         |  ---> Launch deleteTrade (TradeService.java:96)
+2021-08-02 18:34:16,349 - [main] INFO       | com.nnk.springboot.service.implentation.TradeService         |   ---> ** deleted ** Trade with id: 0 (TradeService.java:100)
+2021-08-02 18:34:21,244 - [main] INFO       | com.nnk.springboot.service.implentation.TradeService         |  ---> Launch deleteTrade (TradeService.java:96)
+2021-08-02 18:34:21,247 - [main] ERROR      | com.nnk.springboot.exceptions.DataNotFoundException          |   **--> Trade with id=0 not found in DataBase (DataNotFoundException.java:17)
