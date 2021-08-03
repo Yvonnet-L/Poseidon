@@ -22,6 +22,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
@@ -107,6 +109,7 @@ public class UserServiceTest {
         Mockito.when(userRepository.findById(4)).thenReturn(java.util.Optional.of(userAfterFindById));
         // THEN
         userService.deleteUser(4);
+        verify(userRepository, times(1)).deleteById(any(Integer.class));
     }
 
     @Test

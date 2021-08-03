@@ -21,6 +21,8 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class RatingServiceTest {
@@ -108,6 +110,7 @@ public class RatingServiceTest {
         Mockito.when(ratingRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.of(ratingFind));
         // THEN
         ratingService.deleteRating(any(Integer.class));
+        verify(ratingRepository, times(1)).deleteById(any(Integer.class));
     }
     @Test
     @DisplayName("Test sur deleteRating")

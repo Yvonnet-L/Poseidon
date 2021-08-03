@@ -23,6 +23,8 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class TradeServiceTest {
@@ -110,6 +112,7 @@ public class TradeServiceTest {
         Mockito.when(tradeRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.of(tradeFind));
         // THEN
         tradeService.deleteTrade(any(Integer.class));
+        verify(tradeRepository, times(1)).deleteById(any(Integer.class));
     }
     @Test
     @DisplayName("Test sur deleteTrade with trade not exist")

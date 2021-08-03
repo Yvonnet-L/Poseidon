@@ -21,6 +21,8 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class RuleNameServiceTest {
@@ -119,6 +121,7 @@ public class RuleNameServiceTest {
         Mockito.when(ruleNameRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.of(ruleNameFind));
         // THEN
         ruleNameService.deleteRuleName(any(Integer.class));
+        verify(ruleNameRepository, times(1)).deleteById(any(Integer.class));
     }
     @Test
     @DisplayName("Test sur deleteRuleName with ruleName not exist")

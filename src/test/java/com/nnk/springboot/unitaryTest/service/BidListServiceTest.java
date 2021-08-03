@@ -18,9 +18,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Arrays;
 import java.util.List;
 
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class BidListServiceTest {
@@ -101,9 +104,9 @@ public class BidListServiceTest {
         BidList bidList = new BidList( "account1", "type1", 1.11);
         // WHEN
         Mockito.when(bidListRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.of(bidList));
-        // THEN
         bidListService.deleteBidList(any(Integer.class));
-
+        // THEN
+        verify( bidListRepository, times(1)).findById(any(Integer.class));
     }
 
     @Test
