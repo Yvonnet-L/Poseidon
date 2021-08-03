@@ -74,7 +74,7 @@ private static Logger logger = LogManager.getLogger(DtoBuilder.class);
      * @return ratingDTO RatingDTO
      */
     public RatingDTO buildRatingDTO(final Rating rating) {
-        return new RatingDTO(rating.getId(), rating.getMoodyRating(),rating.getSandRating(),
+        return new RatingDTO(rating.getId(), rating.getMoodysRating(),rating.getSandRating(),
                              rating.getFitchRating(), rating.getOrderNumber() );
     }
     //-------------------------------------------------------------------------------------------

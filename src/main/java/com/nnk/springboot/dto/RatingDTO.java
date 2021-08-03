@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
@@ -24,7 +23,7 @@ public class RatingDTO {
     private Integer id;
 
     @NotBlank(message = "Account is mandatory")
-    private String moodyRating;
+    private String moodysRating;
 
     @NotBlank(message = "Account is mandatory")
     private String sandRating;
@@ -37,8 +36,8 @@ public class RatingDTO {
 
     //----------Constructor-----------------------------------------------------------------------------------
 
-    public RatingDTO(String moodyRating, String sandRating, String fitchRating, Integer orderNumber) {
-        this.moodyRating = moodyRating;
+    public RatingDTO(String moodysRating, String sandRating, String fitchRating, Integer orderNumber) {
+        this.moodysRating = moodysRating;
         this.sandRating = sandRating;
         this.fitchRating = fitchRating;
         this.orderNumber = orderNumber;

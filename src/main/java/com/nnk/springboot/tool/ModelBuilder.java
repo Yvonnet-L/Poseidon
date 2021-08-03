@@ -79,7 +79,7 @@ public class ModelBuilder {
      */
     public Rating buildRating(final RatingDTO ratingDTO) {
         logger.info( " ---> Launch buildTrade");
-        return new Rating(ratingDTO.getMoodyRating(),ratingDTO.getSandRating(), ratingDTO.getFitchRating(),
+        return new Rating(ratingDTO.getMoodysRating(),ratingDTO.getSandRating(), ratingDTO.getFitchRating(),
                        ratingDTO.getOrderNumber() );
     }
     //-------------------------------------------------------------------------------------------

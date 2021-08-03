@@ -24,6 +24,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Arrays;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
@@ -58,6 +59,44 @@ public class RatingControllerTest {
                 .andExpect(model().attributeExists("ratings"))
                 .andExpect(view().name("rating/list"))
                 .andExpect(status().isOk());
+    }
+    //---------Get----addRating------/rating/add"-----------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test response 200 on addTrade")
+    public void testAddRating() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/rating/add"))
+                .andExpect(view().name("rating/add"))
+                .andExpect(status().isOk());
+    }
+    //---------Post----validate------/rating/validate"-------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test response 302/Redirection/Model-hasNoErrors on Post validate")
+    public void testValidateWithRatingDtoWithAllParamsOk() throws Exception {
+        Mockito.when(ratingService.addRating(any(RatingDTO.class))).thenReturn(rating1DTO);
+        mockMvc.perform(MockMvcRequestBuilders.post("/rating/validate")
+                .sessionAttr("rating", rating1DTO)
+                .param("moodysRating", rating1DTO.getMoodysRating())
+                .param("sandRating", rating1DTO.getSandRating())
+                .param("fitchRating", rating1DTO.getFitchRating())
+                .param("orderNumber", rating1DTO.getOrderNumber().toString()))
+                .andExpect(model().hasNoErrors())
+                .andExpect(redirectedUrl("/rating/list"))
+                .andExpect(status().is3xxRedirection());
+    }
+
+    @Test
+    @DisplayName("Test Post validate with ratingDTO not conform")
+    public void testValidateWithRatingDtoWithParamsEmpty() throws Exception {
+        RatingDTO ratingDTONotConform = new RatingDTO("","","",0);
+        mockMvc.perform(MockMvcRequestBuilders.post("/rating/validate")
+                .sessionAttr("rating", ratingDTONotConform)
+                .param("moodysRating", ratingDTONotConform.getMoodysRating())
+                .param("sandRating", ratingDTONotConform.getSandRating())
+                .param("fitchRating", ratingDTONotConform.getFitchRating())
+                .param("orderNumber", ratingDTONotConform.getOrderNumber().toString()))
+                .andExpect(model().hasErrors())
+                .andExpect(view().name("rating/add"))
+                .andReturn();
     }
 
 }

@@ -24,8 +24,8 @@ public class Rating {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "moody_rating")
-    private String moodyRating;
+    @Column(name = "moodys_rating")
+    private String moodysRating;
 
     @Column(name = "sand_rating")
     private String sandRating;
@@ -38,8 +38,8 @@ public class Rating {
 
     //------------------ Constructor -------------------------------------------------------
 
-    public Rating(String moodyRating, String sandRating, String fitchRating, Integer orderNumber) {
-        this.moodyRating = moodyRating;
+    public Rating(String moodysRating, String sandRating, String fitchRating, Integer orderNumber) {
+        this.moodysRating = moodysRating;
         this.sandRating = sandRating;
         this.fitchRating = fitchRating;
         this.orderNumber = orderNumber;

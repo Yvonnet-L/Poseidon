@@ -1,6 +1,7 @@
 package com.nnk.springboot.controller;
 
 import com.nnk.springboot.domain.Rating;
+import com.nnk.springboot.dto.RatingDTO;
 import com.nnk.springboot.service.implentation.RatingService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,16 +31,23 @@ public class RatingController {
         model.addAttribute("ratings", ratingService.getAllRating());
         return "rating/list";
     }
-
+    //----------Get------/rating/add-----------------------------------------------------------
     @GetMapping("/rating/add")
-    public String addRatingForm(Rating rating) {
+    public String addRatingForm(RatingDTO ratingDTO) {
+        logger.info( "--> Launch /rating/add" );
         return "rating/add";
     }
-
+    //---------Post-----/rating/validate----------------------------------------------------------
     @PostMapping("/rating/validate")
-    public String validate(@Valid Rating rating, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return Rating list
-        return "rating/add";
+    public String validate(@Valid RatingDTO ratingDTO, BindingResult result, Model model) {
+        logger.info( "--> Launch /rating/validate");
+        if(result.hasErrors()){
+            logger.info( "  --> **  Errors ** Nb error: " + result.getErrorCount());
+            return "rating/add";
+        }
+        ratingService.addRating(ratingDTO);
+        logger.info( "  --> **  Trade saved **");
+        return "redirect:/rating/list";
     }
 
     @GetMapping("/rating/update/{id}")
