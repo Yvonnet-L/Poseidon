@@ -53,9 +53,18 @@ public class RuleNameService implements IRuleNameService {
        }
        return ruleNameDTOList;
     }
+    //------------addRuleName-------------------------------------------------------------------------------------
+    /**
+     * Method to add a RuleName
+     *
+     * @Param  RuleNameDTO ruleNameDTO
+     * @return RuleNameDTO validated return of DB
+     */
     @Override
     public RuleNameDTO addRuleName(RuleNameDTO ruleNameDTO) {
-        return null;
+        logger.info(" ---> Launch addRuleName");
+        RuleName ruleName = ruleNameRepository.save(modelBuilder.buildRuleName(ruleNameDTO));
+        return dtoBuilder.buildRuleNameDTO(ruleName);
     }
 
     @Override
