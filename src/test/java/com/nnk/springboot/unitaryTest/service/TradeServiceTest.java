@@ -102,7 +102,7 @@ public class TradeServiceTest {
     }
     //---------- DeleteTradeById-----------------------------------------------------------------------------------------------------------------
     @Test
-    @DisplayName("Test sur deleteTrade")
+    @DisplayName("Test sur deleteTrade with trade exist")
     public void deleteTradeByIdExistTest(){
         // GIVEN
         Trade tradeFind = new Trade(4,"account4","type4",555.44);
@@ -112,7 +112,7 @@ public class TradeServiceTest {
         tradeService.deleteTrade(any(Integer.class));
     }
     @Test
-    @DisplayName("Test sur deleteCurvePoint")
+    @DisplayName("Test sur deleteTrade with trade not exist")
     public void deleteCurvePointByIdNotExistTest(){
         // WHEN
         Mockito.when(tradeRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.empty());

@@ -110,5 +110,24 @@ public class RuleNameServiceTest {
         // THEN
         assertThrows(DataNotFoundException.class, () -> ruleNameService.updateRuleName(ruleNameDTOofView,any(Integer.class)));
     }
-
+    //---------- DeleteRuleNameById-----------------------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test sur deleteRuleName with ruleName exist")
+    public void deleteRuleNameByIdExistTest(){
+        // GIVEN
+        RuleName ruleNameFind = new RuleName("name1", "desc1", "json1",
+                                                "temp1", "sqlStr1", "sqlPart1");
+        // WHEN
+        Mockito.when(ruleNameRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.of(ruleNameFind));
+        // THEN
+        ruleNameService.deleteRuleName(any(Integer.class));
+    }
+    @Test
+    @DisplayName("Test sur deleteRuleName with ruleName not exist")
+    public void deleteRuleNameByIdNotExistTest(){
+        // WHEN
+        Mockito.when(ruleNameRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.empty());
+        // THEN
+        assertThrows(DataNotFoundException.class, () -> ruleNameService.deleteRuleName(any(Integer.class)));
+    }
 }

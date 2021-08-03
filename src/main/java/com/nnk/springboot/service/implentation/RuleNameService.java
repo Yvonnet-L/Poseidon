@@ -1,6 +1,7 @@
 package com.nnk.springboot.service.implentation;
 
 import com.nnk.springboot.domain.RuleName;
+import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.dto.RuleNameDTO;
 import com.nnk.springboot.exceptions.DataNotFoundException;
 import com.nnk.springboot.repositories.RuleNameRepository;
@@ -85,10 +86,19 @@ public class RuleNameService implements IRuleNameService {
         ruleName = ruleNameRepository.save(ruleName);
         return dtoBuilder.buildRuleNameDTO(ruleName);
     }
-
+    //------------deleteRuleName----------------------------------------------------------------------------------
+    /**
+     * Void to delete RuleName with id
+     *
+     * @Param  int id of RuleName
+     */
     @Override
     public void deleteRuleName(int id) {
-
+        logger.info(" ---> Launch deleteRuleName");
+        RuleName ruleNameFind = ruleNameRepository.findById(id).orElseThrow(()
+                -> new DataNotFoundException("RuleName with id=" + id + " not found in DataBase"));
+        ruleNameRepository.deleteById(id);
+        logger.info("  ---> ** deleted ** RuleName with id: " + id);
     }
 
     @Override
