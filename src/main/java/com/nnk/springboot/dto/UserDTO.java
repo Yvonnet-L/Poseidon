@@ -18,6 +18,12 @@ import javax.validation.constraints.Pattern;
     @EqualsAndHashCode(of=...) : génère equals et hashCode (et d'autres méthodes) sur les champs donnés ;
     @ToString(of=...) : génère toString sur les champs donnés.
 */
+
+/**
+ *  UserDTO is the object of the view which makes the link with the User model
+ * @See User
+ */
+
 @Getter
 @Setter
 @NoArgsConstructor

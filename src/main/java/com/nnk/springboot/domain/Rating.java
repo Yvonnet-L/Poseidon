@@ -8,7 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 /**
- *  Class Trade which allows the link with the rating table of the DB
+ *  Class Rating which allows the link with the rating table of the DB
  */
 
 @Entity
