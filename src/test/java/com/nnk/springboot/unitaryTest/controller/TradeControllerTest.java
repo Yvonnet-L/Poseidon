@@ -93,7 +93,7 @@ public class TradeControllerTest {
                 .andExpect(view().name("trade/add"))
                 .andReturn();
     }
-    //--------Ge----/trade/update/{id}------------------------------------------------------------------------------------------------
+    //--------Get----/trade/update/{id}------------------------------------------------------------------------------------------------
     @Test
     @DisplayName("Test response 200 on showUpdate")
     public void testshowUpdateForm() throws Exception {

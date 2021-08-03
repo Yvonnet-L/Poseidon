@@ -98,5 +98,44 @@ public class RatingControllerTest {
                 .andExpect(view().name("rating/add"))
                 .andReturn();
     }
+    //--------Get----/rating/update/{id}------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test response 200 on showUpdate")
+    public void testshowUpdateForm() throws Exception {
+        Mockito.when(ratingService.getRatingById(any(Integer.class))).thenReturn(rating1DTO);
+        mockMvc.perform(MockMvcRequestBuilders.get("/rating/update/1"))
+                .andExpect(status().isOk());
+    }
+    //--------Post-----updateTrade--/Trade/update/{id}------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test response 302/Redirection/Model-hasNoErrors on Post updateBid")
+    public void testUpdateTradeWithBidListDTOConform() throws Exception {
+        Mockito.when(ratingService.updateRating(rating1DTO,1)).thenReturn(rating1DTO);
+        mockMvc.perform(MockMvcRequestBuilders.post("/rating/update/1")
+                .sessionAttr("rating", rating1DTO)
+                .param("moodysRating", rating1DTO.getMoodysRating())
+                .param("sandRating", rating1DTO.getSandRating())
+                .param("fitchRating", rating1DTO.getFitchRating())
+                .param("orderNumber", rating1DTO.getOrderNumber().toString()))
+                .andExpect(model().hasNoErrors())
+                .andExpect(redirectedUrl("/rating/list"))
+                .andExpect(status().is3xxRedirection());
+    }
+
+    @Test
+    @DisplayName("Test Post updateRating with tradeDTO not conform")
+    public void testUpdateTradeWithBidListDTONotConform() throws Exception {
+        RatingDTO ratingDTONotConform = new RatingDTO("","","",0);
+        mockMvc.perform(MockMvcRequestBuilders.post("/rating/update/1")
+                .sessionAttr("rating", ratingDTONotConform)
+                .param("moodysRating", ratingDTONotConform.getMoodysRating())
+                .param("sandRating", ratingDTONotConform.getSandRating())
+                .param("fitchRating", ratingDTONotConform.getFitchRating())
+                .param("orderNumber", ratingDTONotConform.getOrderNumber().toString()))
+                .andExpect(model().hasErrors())
+                .andExpect(view().name("rating/update"))
+                .andReturn();
+    }
+
 
 }

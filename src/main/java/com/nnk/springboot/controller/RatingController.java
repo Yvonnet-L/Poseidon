@@ -2,6 +2,7 @@ package com.nnk.springboot.controller;
 
 import com.nnk.springboot.domain.Rating;
 import com.nnk.springboot.dto.RatingDTO;
+import com.nnk.springboot.dto.TradeDTO;
 import com.nnk.springboot.service.implentation.RatingService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -49,17 +50,27 @@ public class RatingController {
         logger.info( "  --> **  Trade saved **");
         return "redirect:/rating/list";
     }
-
+    //----------Get-----/rating/update/{id}----------------------------------------------------------
     @GetMapping("/rating/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get Rating by Id and to model then show to the form
+        logger.info( "--> Launch /rating/update/{id} with id: " + id);
+        RatingDTO ratingDTO = ratingService.getRatingById(id);
+        model.addAttribute("ratingDTO", ratingDTO);
         return "rating/update";
     }
-
+    //----------Post-----/rating/update/{id}----------------------------------------------------------
     @PostMapping("/rating/update/{id}")
-    public String updateRating(@PathVariable("id") Integer id, @Valid Rating rating,
+    public String updateRating(@PathVariable("id") Integer id, @Valid RatingDTO ratingDTO,
                                BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Rating and return Rating list
+        logger.info( "--> Launch Post rating/update/{id} with id: " + id);
+        if(result.hasErrors()){
+            logger.info( "  --> **  Errors ** Nb error: " + result.getErrorCount());
+            model.addAttribute("ratingDTO", ratingDTO);
+            model.addAttribute(id);
+            return "rating/update";
+        }
+        ratingService.updateRating(ratingDTO, id);
+        logger.info( "  --> **  Trade updated ** id: " + id);
         return "redirect:/rating/list";
     }
 
