@@ -64,4 +64,14 @@ public class DtoBuilderTest {
 
         Assertions.assertThat((dtolBuilder.buildRatingDTO(rating)).equals(ratingDTO));
     }
+    //-----------------RuleNameDTO--------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("RuleNameDTO Builder Test")
+    public void buildRuleNameTest(){
+        RuleName ruleName= new RuleName(1,"name1","descript1", "json1",
+                                            "template1", "sqlStr1","sqlPart1");
+        RuleNameDTO ruleNameDTO= new RuleNameDTO(1,"name1","descript1", "json1",
+                                            "template1", "sqlStr1","sqlPart1");
+        Assertions.assertThat((dtolBuilder.buildRuleNameDTO(ruleName)).equals(ruleNameDTO));
+    }
 }

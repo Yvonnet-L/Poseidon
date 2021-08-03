@@ -77,6 +77,18 @@ private static Logger logger = LogManager.getLogger(DtoBuilder.class);
         return new RatingDTO(rating.getId(), rating.getMoodysRating(),rating.getSandRating(),
                              rating.getFitchRating(), rating.getOrderNumber() );
     }
+    //-----------------RuleNameDTO-----------------------------------------------------------------------
+    /**
+     *  Build RuleNameDTO with RuleName
+     *
+     * @param ruleName RuleName
+     * @return ruleNameDTO RuleNameDTO
+     */
+    public RuleNameDTO buildRuleNameDTO(final RuleName ruleName) {
+        return new RuleNameDTO(ruleName.getId(), ruleName.getName(), ruleName.getDescription(),
+                                ruleName.getJson(), ruleName.getTemplate(), ruleName.getSqlStr(),
+                                    ruleName.getSqlPart());
+    }
     //-------------------------------------------------------------------------------------------
 
 }

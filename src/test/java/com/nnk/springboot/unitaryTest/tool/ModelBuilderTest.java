@@ -66,7 +66,17 @@ public class ModelBuilderTest {
 
         Assertions.assertThat((modelBuilder.buildRating(ratingDTO)).equals(rating));
     }
+    //-----------------RuleName--------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("RuleName Builder Test")
+    public void buildRuleNameTest(){
+        RuleName ruleName= new RuleName("name1","descript1", "json1",
+                "template1", "sqlStr1","sqlPart1");
+        RuleNameDTO ruleNameDTO= new RuleNameDTO("name1","descript1", "json1",
+                "template1", "sqlStr1","sqlPart1");
 
+        Assertions.assertThat((modelBuilder.buildRuleName(ruleNameDTO)).equals(ruleName));
+    }
 
 
 }

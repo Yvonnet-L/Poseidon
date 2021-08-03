@@ -72,7 +72,7 @@ public class ModelBuilder {
     }
     //--------------build-Rating---------------------------------------------------------------------------
     /**
-     *  Build CurvePoint with CurvePointDTO
+     *  Build Rating with RatingDTO
      *
      * @param  ratingDTO RatingDTO
      * @return rating Rating
@@ -81,6 +81,18 @@ public class ModelBuilder {
         logger.info( " ---> Launch buildTrade");
         return new Rating(ratingDTO.getMoodysRating(),ratingDTO.getSandRating(), ratingDTO.getFitchRating(),
                        ratingDTO.getOrderNumber() );
+    }
+    //--------------build-RuleName---------------------------------------------------------------------------
+    /**
+     *  Build RuleName with RuleNameDTO
+     *
+     * @param  ruleNameDTO RuleNameDTO
+     * @return ruleName RuleName
+     */
+    public RuleName buildRuleName(final RuleNameDTO ruleNameDTO) {
+        logger.info( " ---> Launch buildRuleName");
+        return new RuleName(ruleNameDTO.getName(), ruleNameDTO.getDescription(), ruleNameDTO.getJson(),
+                            ruleNameDTO.getTemplate(), ruleNameDTO.getSqlStr(), ruleNameDTO.getSqlPart());
     }
     //-------------------------------------------------------------------------------------------
 
