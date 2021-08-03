@@ -100,9 +100,18 @@ public class RuleNameService implements IRuleNameService {
         ruleNameRepository.deleteById(id);
         logger.info("  ---> ** deleted ** RuleName with id: " + id);
     }
-
+    //------------getRuleNameById----------------------------------------------------------------------------------
+    /**
+     * Void to get RuleName with id
+     *
+     * @Param  int id of RuleName
+     */
     @Override
     public RuleNameDTO getRuleNameById(int id) {
-        return null;
+        logger.info(" ---> Launch getRuleNameById");
+        RuleName ruleNameFind = ruleNameRepository.findById(id).orElseThrow(()
+                -> new DataNotFoundException("RuleName with id=" + id + " not found in DataBase"));
+        logger.info("  ---> ** find ** RuleName with id: " + id);
+        return dtoBuilder.buildRuleNameDTO(ruleNameFind);
     }
 }

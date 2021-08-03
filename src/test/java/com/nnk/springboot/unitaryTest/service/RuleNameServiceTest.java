@@ -130,4 +130,28 @@ public class RuleNameServiceTest {
         // THEN
         assertThrows(DataNotFoundException.class, () -> ruleNameService.deleteRuleName(any(Integer.class)));
     }
+    //---------- GetRuleNameById-----------------------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test sur getRuleNameById with id exist")
+    public void getRuleNameByIdExistTest(){
+        // GIVEN
+        RuleName ruleNameFind = new RuleName(1,"name1", "desc1", "json1",
+                                                "temp1", "sqlStr1", "sqlPart1");
+        RuleNameDTO ruleNameDTOResult = new RuleNameDTO(1,"name1", "desc1", "json1",
+                                                            "temp1", "sqlStr1", "sqlPart1");
+        // WHEN
+        Mockito.when(ruleNameRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.of(ruleNameFind));
+        Mockito.when(dtoBuilder.buildRuleNameDTO(any(RuleName.class))).thenReturn(ruleNameDTOResult);
+        // THEN
+        assertThat(ruleNameService.getRuleNameById(any(Integer.class))).isEqualTo(ruleNameDTOResult);
+    }
+
+    @Test
+    @DisplayName("Test sur getRuleNameById with id not exist")
+    public void getRuleNameByIdNotExistTest(){
+        // WHEN
+        Mockito.when(ruleNameRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.empty());
+        // THEN
+        assertThrows(DataNotFoundException.class, () -> ruleNameService.getRuleNameById(any(Integer.class)));
+    }
 }
