@@ -2,6 +2,7 @@ package com.nnk.springboot.controller;
 
 import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.dto.RuleNameDTO;
+import com.nnk.springboot.dto.TradeDTO;
 import com.nnk.springboot.service.interfaces.IRuleNameService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -37,7 +38,7 @@ public class RuleNameController {
         logger.info( "--> Launch /ruleName/add" );
         return "ruleName/add";
     }
-    //---------Post-----/trade/validate----------------------------------------------------------
+    //---------Post-----/ruleName/validate----------------------------------------------------------
     @PostMapping("/ruleName/validate")
     public String validate(@Valid RuleNameDTO ruleNameDTO, BindingResult result, Model model) {
         logger.info( "--> Launch /ruleName/validate");
@@ -49,17 +50,27 @@ public class RuleNameController {
         logger.info( "  --> **  RuleName saved **");
         return "redirect:/ruleName/list";
     }
-
+    //----------Get-----/ruleName/update/{id}----------------------------------------------------------
     @GetMapping("/ruleName/update/{id}")
     public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
-        // TODO: get RuleName by Id and to model then show to the form
+        logger.info( "--> Launch /ruleName/update/{id} with id: " + id);
+        RuleNameDTO ruleNameDTO = ruleNameService.getRuleNameById(id);
+        model.addAttribute("ruleNameDTO", ruleNameDTO);
         return "ruleName/update";
     }
-
+    //----------Post-----/ruleName/update/{id}---------------------------------------------------------------
     @PostMapping("/ruleName/update/{id}")
-    public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName ruleName,
+    public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleNameDTO ruleNameDTO,
                                  BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update RuleName and return RuleName list
+        logger.info( "--> Launch Post ruleName/update/{id} with id: " + id);
+        if(result.hasErrors()){
+            logger.info( "  --> **  Errors ** Nb error: " + result.getErrorCount());
+            model.addAttribute("ruleNameDTO", ruleNameDTO);
+            model.addAttribute(id);
+            return "ruleName/update";
+        }
+        ruleNameService.updateRuleName(ruleNameDTO, id);
+        logger.info( "  --> **  RuleName updated ** id: " + id);
         return "redirect:/ruleName/list";
     }
 

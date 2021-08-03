@@ -103,4 +103,46 @@ public class RuleNameControllerTest {
                 .andExpect(view().name("ruleName/add"))
                 .andReturn();
     }
+    //--------Get----/ruleName/update/{id}------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test response 200 on showUpdate")
+    public void testshowUpdateForm() throws Exception {
+        Mockito.when(ruleNameService.getRuleNameById(any(Integer.class))).thenReturn(ruleName1DTO);
+        mockMvc.perform(MockMvcRequestBuilders.get("/ruleName/update/1"))
+                .andExpect(status().isOk());
+    }
+    //--------Post-----updateRuleName--/ruleName/update/{id}------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test response 302/Redirection/Model-hasNoErrors on Post updateBid")
+    public void testUpdateRuleNameWithDTOConform() throws Exception {
+        Mockito.when(ruleNameService.updateRuleName(ruleName1DTO,1)).thenReturn(ruleName1DTO);
+        mockMvc.perform(MockMvcRequestBuilders.post("/ruleName/update/1")
+                .sessionAttr("ruleName", ruleName1DTO)
+                .param("name",  ruleName1DTO.getName())
+                .param("description",  ruleName1DTO.getDescription())
+                .param("json",  ruleName1DTO.getJson())
+                .param("template",  ruleName1DTO.getTemplate())
+                .param("sqlStr",  ruleName1DTO.getSqlStr())
+                .param("sqlPart",  ruleName1DTO.getSqlPart()))
+                .andExpect(model().hasNoErrors())
+                .andExpect(redirectedUrl("/ruleName/list"))
+                .andExpect(status().is3xxRedirection());
+    }
+
+    @Test
+    @DisplayName("Test Post updateRuleName with DTO not conform")
+    public void testUpdateTradeWithBidListDTONotConform() throws Exception {
+        RuleNameDTO ruleNameDTONotConform = new RuleNameDTO("","","","","","");
+        mockMvc.perform(MockMvcRequestBuilders.post("/ruleName/update/1")
+                .sessionAttr("ruleName", ruleNameDTONotConform)
+                .param("name",  ruleNameDTONotConform.getName())
+                .param("description",  ruleNameDTONotConform.getDescription())
+                .param("json",  ruleNameDTONotConform.getJson())
+                .param("template",  ruleNameDTONotConform.getTemplate())
+                .param("sqlStr",  ruleNameDTONotConform.getSqlStr())
+                .param("sqlPart",  ruleNameDTONotConform.getSqlPart()))
+                .andExpect(model().hasErrors())
+                .andExpect(view().name("ruleName/update"))
+                .andReturn();
+    }
 }

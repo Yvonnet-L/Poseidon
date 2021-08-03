@@ -104,7 +104,7 @@ public class TradeControllerTest {
     //--------Post-----updateTrade--/Trade/update/{id}------------------------------------------------------------------------------------------------
     @Test
     @DisplayName("Test response 302/Redirection/Model-hasNoErrors on Post updateBid")
-    public void testUpdateTradeWithBidListDTOConform() throws Exception {
+    public void testUpdateTradeWithDTOConform() throws Exception {
         Mockito.when(tradeService.updateTrade(trade1DTO,1)).thenReturn(trade1DTO);
         mockMvc.perform(MockMvcRequestBuilders.post("/trade/update/1")
                 .sessionAttr("trade", trade1DTO)
@@ -118,7 +118,7 @@ public class TradeControllerTest {
 
     @Test
     @DisplayName("Test Post updateTrade with tradeDTO not conform")
-    public void testUpdateTradeWithBidListDTONotConform() throws Exception {
+    public void testUpdateTradeWithDTONotConform() throws Exception {
         TradeDTO tradeDTONotConform = new TradeDTO("","",0.0);
         mockMvc.perform(MockMvcRequestBuilders.post("/trade/update/1")
                 .sessionAttr("bid", tradeDTONotConform)
