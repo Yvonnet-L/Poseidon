@@ -368,3 +368,6 @@
 2021-08-03 09:13:02,294 - [main] INFO       | com.nnk.springboot.tool.DtoBuilder                           |  ---> Launch buildRuleName (ModelBuilder.java:93)
 2021-08-03 10:19:55,051 - [main] INFO       | com.nnk.springboot.service.implentation.RuleNameService      |  ---> Launch getAllRuleName (RuleNameService.java:48)
 2021-08-03 10:31:43,172 - [main] INFO       | com.nnk.springboot.service.implentation.RuleNameService      |  ---> Launch addRuleName (RuleNameService.java:65)
+2021-08-03 10:47:09,683 - [main] INFO       | com.nnk.springboot.service.implentation.RuleNameService      |  ---> Launch updateRuleName (RuleNameService.java:80)
+2021-08-03 10:47:14,975 - [main] INFO       | com.nnk.springboot.service.implentation.RuleNameService      |  ---> Launch updateRuleName (RuleNameService.java:80)
+2021-08-03 10:47:14,979 - [main] ERROR      | com.nnk.springboot.exceptions.DataNotFoundException          |   **--> RuleName with id=0 not found in DataBase (DataNotFoundException.java:17)

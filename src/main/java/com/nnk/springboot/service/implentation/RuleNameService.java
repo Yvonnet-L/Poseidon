@@ -2,6 +2,7 @@ package com.nnk.springboot.service.implentation;
 
 import com.nnk.springboot.domain.RuleName;
 import com.nnk.springboot.dto.RuleNameDTO;
+import com.nnk.springboot.exceptions.DataNotFoundException;
 import com.nnk.springboot.repositories.RuleNameRepository;
 import com.nnk.springboot.service.interfaces.IRuleNameService;
 import com.nnk.springboot.tool.DtoBuilder;
@@ -66,10 +67,23 @@ public class RuleNameService implements IRuleNameService {
         RuleName ruleName = ruleNameRepository.save(modelBuilder.buildRuleName(ruleNameDTO));
         return dtoBuilder.buildRuleNameDTO(ruleName);
     }
-
+    //------------updateRuleName-------------------------------------------------------------------------------------
+    /**
+     * Method to update a RuleName
+     *
+     * @Param  RuleNameDTO ruleNameDTO
+     * @Param  int id ( id of RuleName )
+     * @return RuleNameDTO validated return of DB
+     */
     @Override
     public RuleNameDTO updateRuleName(RuleNameDTO ruleNameDTO, int id) {
-        return null;
+        logger.info(" ---> Launch updateRuleName");
+        RuleName ruleNameFind = ruleNameRepository.findById(id).orElseThrow(()
+                        -> new DataNotFoundException("RuleName with id=" + id + " not found in DataBase"));
+        RuleName ruleName = modelBuilder.buildRuleName(ruleNameDTO);
+        ruleName.setId(id);
+        ruleName = ruleNameRepository.save(ruleName);
+        return dtoBuilder.buildRuleNameDTO(ruleName);
     }
 
     @Override

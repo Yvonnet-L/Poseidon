@@ -92,7 +92,7 @@ public class TradeServiceTest {
 
     @Test
     @DisplayName("Test sur updateTrade with trade not Exist")
-    public void updateTradeTestWithCurvePointNotExist(){
+    public void updateTradeTestWithTradeNotExist(){
         // GIVEN
         TradeDTO tradeDTOofView = new TradeDTO("account4","type4",44.44);
         // WHEN
