@@ -136,6 +136,13 @@ public class RatingControllerTest {
                 .andExpect(view().name("rating/update"))
                 .andReturn();
     }
-
+    //--------Get------/rating/delete/{id}---------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test Get deleteRating responce Ok/redirect")
+    public void testDeleteRating() throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders.get("/rating/delete/1"))
+                .andExpect(redirectedUrl("/rating/list"))
+                .andExpect(status().is3xxRedirection());
+    }
 
 }

@@ -129,7 +129,7 @@ public class TradeControllerTest {
                 .andExpect(view().name("trade/update"))
                 .andReturn();
     }
-    //--------Get------/bidList/delete/{id}---------------------------------------------------------------------------------------------
+    //--------Get------/trade/delete/{id}---------------------------------------------------------------------------------------------
     @Test
     @DisplayName("Test Get deleteTrade responce Ok/redirect")
     public void testDeleteTrade() throws Exception{

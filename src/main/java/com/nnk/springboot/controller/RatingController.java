@@ -70,13 +70,15 @@ public class RatingController {
             return "rating/update";
         }
         ratingService.updateRating(ratingDTO, id);
-        logger.info( "  --> **  Trade updated ** id: " + id);
+        logger.info( "  --> **  Rating updated ** id: " + id);
         return "redirect:/rating/list";
     }
-
+    //----------Get----/rating/delete/{id}--------------------------------------------------------------------------------------
     @GetMapping("/rating/delete/{id}")
     public String deleteRating(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find Rating by Id and delete the Rating, return to Rating list
+        logger.info( "--> Launch /rating/delete/{id} + id: " + id );
+        ratingService.deleteRating(id);
+        logger.info( "  --> **  Rating Deleted ** id: " + id);
         return "redirect:/rating/list";
     }
 }
