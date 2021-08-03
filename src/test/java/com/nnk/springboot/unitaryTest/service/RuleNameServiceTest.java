@@ -1,9 +1,7 @@
 package com.nnk.springboot.unitaryTest.service;
 
 import com.nnk.springboot.domain.RuleName;
-import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.dto.RuleNameDTO;
-import com.nnk.springboot.dto.TradeDTO;
 import com.nnk.springboot.exceptions.DataNotFoundException;
 import com.nnk.springboot.repositories.RuleNameRepository;
 import com.nnk.springboot.service.implentation.RuleNameService;

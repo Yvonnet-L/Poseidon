@@ -1,7 +1,5 @@
 package com.nnk.springboot.controller;
 
-import com.nnk.springboot.domain.Trade;
-import com.nnk.springboot.dto.BidListDTO;
 import com.nnk.springboot.dto.TradeDTO;
 import com.nnk.springboot.service.interfaces.ITradeService;
 import org.apache.logging.log4j.LogManager;

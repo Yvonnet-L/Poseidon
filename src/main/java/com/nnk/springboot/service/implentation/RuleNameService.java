@@ -1,7 +1,6 @@
 package com.nnk.springboot.service.implentation;
 
 import com.nnk.springboot.domain.RuleName;
-import com.nnk.springboot.domain.Trade;
 import com.nnk.springboot.dto.RuleNameDTO;
 import com.nnk.springboot.exceptions.DataNotFoundException;
 import com.nnk.springboot.repositories.RuleNameRepository;
