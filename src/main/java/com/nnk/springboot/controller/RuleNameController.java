@@ -73,10 +73,12 @@ public class RuleNameController {
         logger.info( "  --> **  RuleName updated ** id: " + id);
         return "redirect:/ruleName/list";
     }
-
+    //----------Get----/ruleName/delete/{id}--------------------------------------------------------------------------------------
     @GetMapping("/ruleName/delete/{id}")
     public String deleteRuleName(@PathVariable("id") Integer id, Model model) {
-        // TODO: Find RuleName by Id and delete the RuleName, return to Rule list
+        logger.info( "--> Launch /ruleName/delete/{id} + id: " + id );
+        ruleNameService.deleteRuleName(id);
+        logger.info( "  --> **  RuleName Deleted ** id: " + id);
         return "redirect:/ruleName/list";
     }
 }

@@ -145,4 +145,13 @@ public class RuleNameControllerTest {
                 .andExpect(view().name("ruleName/update"))
                 .andReturn();
     }
+
+    //--------Get------/ruleName/delete/{id}---------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test Get deleteRuleName responce Ok/redirect")
+    public void testDeleteRuleName() throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders.get("/ruleName/delete/1"))
+                .andExpect(redirectedUrl("/ruleName/list"))
+                .andExpect(status().is3xxRedirection());
+    }
 }
