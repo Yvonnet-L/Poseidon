@@ -3,6 +3,7 @@ package com.nnk.springboot.unitaryTest.controller;
 
 import com.nnk.springboot.controller.RuleNameController;
 import com.nnk.springboot.dto.RuleNameDTO;
+import com.nnk.springboot.dto.TradeDTO;
 import com.nnk.springboot.service.implentation.RuleNameService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -21,6 +22,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Arrays;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
@@ -57,5 +59,48 @@ public class RuleNameControllerTest {
                 .andExpect(model().attributeExists("ruleNames"))
                 .andExpect(view().name("ruleName/list"))
                 .andExpect(status().isOk());
+    }
+
+    //---------Get----addRuleName------/ruleName/add"-----------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test response 200 on addRuleName")
+    public void testAddRuleName() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/ruleName/add"))
+                .andExpect(view().name("ruleName/add"))
+                .andExpect(status().isOk());
+    }
+    //---------Post----validate------/trade/validate"-------------------------------------------------------------------------------------------------
+    @Test
+    @DisplayName("Test response 302/Redirection/Model-hasNoErrors on Post validate")
+    public void testValidateWithRuleNameDtoWithAllParamsOk() throws Exception {
+        Mockito.when(ruleNameService.addRuleName(any(RuleNameDTO.class))).thenReturn(ruleName1DTO);
+        mockMvc.perform(MockMvcRequestBuilders.post("/ruleName/validate")
+                .sessionAttr("ruleName", ruleName1DTO)
+                .param("name",  ruleName1DTO.getName())
+                .param("description",  ruleName1DTO.getDescription())
+                .param("json",  ruleName1DTO.getJson())
+                .param("template",  ruleName1DTO.getTemplate())
+                .param("sqlStr",  ruleName1DTO.getSqlStr())
+                .param("sqlPart",  ruleName1DTO.getSqlPart()))
+                .andExpect(model().hasNoErrors())
+                .andExpect(redirectedUrl("/ruleName/list"))
+                .andExpect(status().is3xxRedirection());
+    }
+
+    @Test
+    @DisplayName("Test Post validate with ruleNameDTO not conform")
+    public void testValidateWithRuleNameDtoWithParamsEmpty() throws Exception {
+        RuleNameDTO ruleNameDTONotConform = new RuleNameDTO("","","","","","");
+        mockMvc.perform(MockMvcRequestBuilders.post("/ruleName/validate")
+                .sessionAttr("ruleName", ruleNameDTONotConform)
+                .param("name",  ruleNameDTONotConform.getName())
+                .param("description",  ruleNameDTONotConform.getDescription())
+                .param("json",  ruleNameDTONotConform.getJson())
+                .param("template",  ruleNameDTONotConform.getTemplate())
+                .param("sqlStr",  ruleNameDTONotConform.getSqlStr())
+                .param("sqlPart",  ruleNameDTONotConform.getSqlPart()))
+                .andExpect(model().hasErrors())
+                .andExpect(view().name("ruleName/add"))
+                .andReturn();
     }
 }

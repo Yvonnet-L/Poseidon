@@ -20,10 +20,10 @@ public class RuleNameDTO {
 
     private Integer id;
 
-    @NotBlank(message = "FullName is mandatory")
+    @NotBlank(message = "Name is mandatory")
     private String name;
 
-    @NotBlank(message = "FullName is mandatory")
+    @NotBlank(message = "description is mandatory")
     private String description;
 
     private String json;

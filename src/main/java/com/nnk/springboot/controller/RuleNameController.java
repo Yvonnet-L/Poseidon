@@ -1,6 +1,7 @@
 package com.nnk.springboot.controller;
 
 import com.nnk.springboot.domain.RuleName;
+import com.nnk.springboot.dto.RuleNameDTO;
 import com.nnk.springboot.service.interfaces.IRuleNameService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,16 +31,23 @@ public class RuleNameController {
         model.addAttribute("ruleNames", ruleNameService.getAllRuleName());
         return "ruleName/list";
     }
-
+    //----------Get------/ruleName/add-----------------------------------------------------------
     @GetMapping("/ruleName/add")
-    public String addRuleForm(RuleName bid) {
+    public String addRuleForm(RuleNameDTO ruleNameDTO) {
+        logger.info( "--> Launch /ruleName/add" );
         return "ruleName/add";
     }
-
+    //---------Post-----/trade/validate----------------------------------------------------------
     @PostMapping("/ruleName/validate")
-    public String validate(@Valid RuleName ruleName, BindingResult result, Model model) {
-        // TODO: check data valid and save to db, after saving return RuleName list
-        return "ruleName/add";
+    public String validate(@Valid RuleNameDTO ruleNameDTO, BindingResult result, Model model) {
+        logger.info( "--> Launch /ruleName/validate");
+        if(result.hasErrors()){
+            logger.info( "  --> **  Errors ** Nb error: " + result.getErrorCount());
+            return "ruleName/add";
+        }
+        ruleNameService.addRuleName(ruleNameDTO);
+        logger.info( "  --> **  RuleName saved **");
+        return "redirect:/ruleName/list";
     }
 
     @GetMapping("/ruleName/update/{id}")
