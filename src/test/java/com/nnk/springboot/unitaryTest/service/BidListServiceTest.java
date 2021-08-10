@@ -104,9 +104,11 @@ public class BidListServiceTest {
         BidList bidList = new BidList( "account1", "type1", 1.11);
         // WHEN
         Mockito.when(bidListRepository.findById(any(Integer.class))).thenReturn(java.util.Optional.of(bidList));
+
         bidListService.deleteBidList(any(Integer.class));
         // THEN
         verify( bidListRepository, times(1)).findById(any(Integer.class));
+        verify( bidListRepository, times(1)).deleteById(any(Integer.class));
     }
 
     @Test
