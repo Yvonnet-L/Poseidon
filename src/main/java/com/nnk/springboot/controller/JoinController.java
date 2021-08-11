@@ -43,7 +43,7 @@ public class JoinController {
         if (!result.hasErrors()) {
             try {
                 UserDTO userCreatedDTO = userService.addUser(userDTO);
-                logger.info("  --> **  User created ** with id: " + userCreatedDTO.getId());
+                logger.info("  --> **  User created **");
                 return "redirect:/login";
             }
             catch (DataAlreadyExistException e){
