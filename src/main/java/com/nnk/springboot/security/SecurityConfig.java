@@ -34,12 +34,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/css/**").permitAll()
-                .antMatchers("/admin").hasAuthority("ADMIN")
+                    .antMatchers("/images/**").permitAll()
+                .antMatchers("/join/**").permitAll()
+                .antMatchers("/admin/*").hasAuthority("ADMIN")
                     .antMatchers("/user/*").hasAuthority("ADMIN")
                 .anyRequest().authenticated();
 
-        http.formLogin().defaultSuccessUrl("/home").failureUrl("/login?error=true");
-
+        http.formLogin().loginPage("/login").defaultSuccessUrl("/bidList/list").failureUrl("/login?error=true").permitAll();
         http.logout().deleteCookies("JSESSIONID").logoutUrl("/app-logout").logoutSuccessUrl("/login");
     }
 

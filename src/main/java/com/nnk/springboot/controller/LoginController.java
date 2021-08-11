@@ -1,24 +1,33 @@
 package com.nnk.springboot.controller;
 
 
+import com.nnk.springboot.dto.UserDTO;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.security.RolesAllowed;
 
-@RestController
+@Controller
 public class LoginController {
 
-    @RequestMapping("/user")
-    @RolesAllowed("USER")
-    public String getUser(){
-        return "Welcome, User";
-    }
+    private static Logger logger = LogManager.getLogger(LoginController.class);
 
-    @RequestMapping("/admin")
-    @RolesAllowed("ADMIN")
-    public String getAdmin(){
-        return "Welcome, Admin";
+    @GetMapping("/login")
+    public String viewLoginPage() {
+        logger.info("--> Launch /login ");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if ( authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return "login";
+        }
+        return "login";
     }
+    //-----------------------------------------------------------------------------------------------------------------
 
 }

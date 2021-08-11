@@ -6,6 +6,7 @@ import com.nnk.springboot.service.interfaces.IUserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,9 +26,6 @@ import javax.validation.Valid;
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private IUserService userService;
 
     private static Logger logger = LogManager.getLogger(UserController.class);
@@ -37,6 +35,11 @@ public class UserController {
     public String userList(Model model)
     {
         logger.info( "--> Launch /user/list" );
+        boolean adminSession = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString().equals("[ADMIN]");
+        if (adminSession){
+            logger.info("  --> Launch /user/list ** Admin Session ** " + adminSession );
+            model.addAttribute("admin", "admin");
+        }
         model.addAttribute("users",userService.getAllUser());
         logger.info( " --->   user/list - OK -" );
         return "user/list";
@@ -52,9 +55,8 @@ public class UserController {
     public String validate(@Valid UserDTO userDTO, BindingResult result, Model model) {
         logger.info( "--> Launch /user/validate" );
         if (!result.hasErrors()) {
-            userService.addUser(userDTO);
-            model.addAttribute("users", userRepository.findAll());
-            logger.info( "  --> **  User created ** id: " + userDTO.getId());
+           UserDTO userCreatedDTO = userService.addUser(userDTO);
+            logger.info( "  --> **  User created **");
             return "redirect:/user/list";
         }
         logger.info( "  --> **  Errors ** Nb error: " + result.getErrorCount());

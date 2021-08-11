@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -51,6 +52,7 @@ public class CurveControllerTest {
 
     //---------Get----home------/curvePoint/list------------------------------------------------------------------------------------------
     @Test
+    @WithMockUser(username="admin")
     @DisplayName("Test response 200 on getBidLists")
     public void testHome() throws Exception {
         Mockito.when(curvePointService.getAllCurvePoint()).thenReturn(Arrays.asList(curvePoint1DTO, curvePoint2DTO));

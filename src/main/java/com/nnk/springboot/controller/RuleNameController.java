@@ -7,6 +7,7 @@ import com.nnk.springboot.service.interfaces.IRuleNameService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,6 +30,11 @@ public class RuleNameController {
     @RequestMapping("/ruleName/list")
     public String home(Model model) {
         logger.info(" --> Launch /ruleName/list" );
+        boolean adminSession = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString().equals("[ADMIN]");
+        if (adminSession){
+            logger.info("  --> Launch /ruleName/list ** Admin Session ** " + adminSession );
+            model.addAttribute("admin", "admin");
+        }
         model.addAttribute("ruleNames", ruleNameService.getAllRuleName());
         return "ruleName/list";
     }

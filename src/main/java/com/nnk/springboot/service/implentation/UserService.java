@@ -2,11 +2,13 @@ package com.nnk.springboot.service.implentation;
 
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.dto.UserDTO;
+import com.nnk.springboot.exceptions.DataAlreadyExistException;
 import com.nnk.springboot.exceptions.DataNotFoundException;
 import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.service.interfaces.IUserService;
 import com.nnk.springboot.tool.DtoBuilder;
 import com.nnk.springboot.tool.ModelBuilder;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +60,9 @@ public class UserService implements IUserService {
      @Override
      public UserDTO addUser(UserDTO userDTO) {
          logger.info(" ---> Launch addlUser");
-
+         if( userRepository.findUserByUsername(userDTO.getUsername()).isPresent()){
+             throw new DataAlreadyExistException("user with username=" + userDTO.getUsername() + " already exist !");
+         }
          BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
          userDTO.setPassword(encoder.encode(userDTO.getPassword()));
          logger.info(" ---> Launch addlUser :" + userDTO.getFullname() + " -- " + userDTO.getUsername() + " -- " +

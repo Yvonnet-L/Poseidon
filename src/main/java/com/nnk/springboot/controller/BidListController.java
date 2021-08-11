@@ -3,9 +3,12 @@ package com.nnk.springboot.controller;
 
 import com.nnk.springboot.dto.BidListDTO;
 import com.nnk.springboot.service.interfaces.IBidListService;
+import com.nnk.springboot.service.interfaces.IUserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.Collection;
+import java.util.List;
 
 @Controller
 public class BidListController {
@@ -30,6 +35,11 @@ public class BidListController {
     public String home(Model model)
     {
         logger.info("--> Launch /bidList/list");
+        boolean adminSession = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString().equals("[ADMIN]");
+        if (adminSession){
+           logger.info("  --> Launch /bidList/list ** Admin Session ** " + adminSession );
+           model.addAttribute("admin", "admin");
+        }
         model.addAttribute("bids", bidListService.getAllBidList());
         return "bidList/list";
     }

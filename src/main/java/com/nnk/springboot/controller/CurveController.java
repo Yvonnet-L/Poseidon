@@ -5,6 +5,7 @@ import com.nnk.springboot.service.interfaces.ICurvePointService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +29,11 @@ public class CurveController {
     @RequestMapping("/curvePoint/list")
     public String home(Model model) {
         logger.info(" --> Launch /curvePoint/list" );
+        boolean adminSession = SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString().equals("[ADMIN]");
+        if (adminSession){
+            logger.info("  --> Launch /curvePoint/list ** Admin Session ** " + adminSession );
+            model.addAttribute("admin", "admin");
+        }
         model.addAttribute("curves", curvePointService.getAllCurvePoint());
         return "curvePoint/list";
     }
