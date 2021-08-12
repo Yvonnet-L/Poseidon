@@ -3,6 +3,7 @@ package com.nnk.springboot.unitaryTest.service;
 
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.dto.UserDTO;
+import com.nnk.springboot.exceptions.DataAlreadyExistException;
 import com.nnk.springboot.exceptions.DataNotFoundException;
 import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.service.implentation.UserService;
@@ -83,6 +84,7 @@ public class UserServiceTest {
         UserDTO userDTOResultSaveWithID = new UserDTO(4,"userNameFour", "Bcrypt-PassWordCorrect-4", "fullNameFour", "USER");
         // WHEN
         Mockito.when(userRepository.findById(4)).thenReturn(java.util.Optional.of(userAfterFindById));
+        Mockito.when(userRepository.findUserByUsername(any(String.class))).thenReturn(java.util.Optional.of(userAfterFindById));
         Mockito.when(modelBuilder.buildUser(userDTO)).thenReturn(userAfterBuilder);
         Mockito.when(userRepository.save(userAfterBuilder)).thenReturn(userAfterSaveWithID);
         Mockito.when(dtoBuilder.buildUserDTO(any(User.class))).thenReturn(userDTOResultSaveWithID);
@@ -98,6 +100,19 @@ public class UserServiceTest {
         Mockito.when(userRepository.findById(4)).thenReturn(java.util.Optional.empty());
         // THEN
         assertThrows(DataNotFoundException.class, () -> userService.updateUser(userDTO,4));
+    }
+
+    @Test
+    public void updateUserNameExistTest(){
+        // GIVEN
+        UserDTO userDTO = new UserDTO(4,"userNameFour", "PassWordCorrect-4", "fullNameFour", "USER");
+        User userAfterFindById = new User(4, "userNameOne", "Bcrypt-PassWordCorrect-4", "fullNameOne", "USER");
+        User userWithSameUsernameFindWithanotherId = new User(5, "userNameFour", "Bcrypt-PassWordCorrect-4", "fullNameFour", "USER");
+        // WHEN
+        Mockito.when(userRepository.findById(4)).thenReturn(java.util.Optional.of(userAfterFindById));
+        Mockito.when(userRepository.findUserByUsername(any(String.class))).thenReturn(java.util.Optional.of(userWithSameUsernameFindWithanotherId));
+        // THEN
+        assertThrows(DataAlreadyExistException.class, () -> userService.updateUser(userDTO,4));
     }
 
     //------------DeleteUser--------------------------------------------------------------------------------------------------------------

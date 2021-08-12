@@ -1,6 +1,7 @@
 package com.nnk.springboot.controller;
 
 import com.nnk.springboot.dto.UserDTO;
+import com.nnk.springboot.exceptions.DataAlreadyExistException;
 import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.service.interfaces.IUserService;
 import org.apache.logging.log4j.LogManager;
@@ -55,9 +56,15 @@ public class UserController {
     public String validate(@Valid UserDTO userDTO, BindingResult result, Model model) {
         logger.info( "--> Launch /user/validate" );
         if (!result.hasErrors()) {
-           UserDTO userCreatedDTO = userService.addUser(userDTO);
-            logger.info( "  --> **  User created **");
-            return "redirect:/user/list";
+            try {
+                UserDTO userCreatedDTO = userService.addUser(userDTO);
+                logger.info( "  --> **  User created **");
+                return "redirect:/user/list";
+            }
+            catch (DataAlreadyExistException e){
+                model.addAttribute("error", e);
+                return "/user/add";
+            }
         }
         logger.info( "  --> **  Errors ** Nb error: " + result.getErrorCount());
         return "user/add";
@@ -80,9 +87,15 @@ public class UserController {
             logger.info( "  --> **  Errors ** Nb error: " + result.getErrorCount());
             return "user/update";
         }
-        userService.updateUser(userDTO, userDTO.getId());
-        logger.info( "  --> **  User updated ** id: " + id);
-        return "redirect:/user/list";
+        try {
+            userService.updateUser(userDTO, userDTO.getId());
+            logger.info("  --> **  User updated ** id: " + id);
+            return "redirect:/user/list";
+        }
+        catch (DataAlreadyExistException e){
+            model.addAttribute("error", e);
+            return "/user/update";
+        }
     }
     //-----------------------------------------------------------------------------------------------------------------
     @GetMapping("/user/delete/{id}")

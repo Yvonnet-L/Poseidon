@@ -17,8 +17,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
- /**
+/**
  * userRepository.findAll()
  */
  @Service
@@ -80,9 +81,15 @@ public class UserService implements IUserService {
      @Override
      public UserDTO updateUser(UserDTO userDTO, int idUser) {
          logger.info(" ---> Launch updateUser");
-
+         /*
+         *  Vérification de l'existence du user par son id
+         */
          User user = userRepository.findById(idUser).orElseThrow(()
                  -> new DataNotFoundException("user with id=" + idUser + " not found in DataBase"));
+         Optional<User> user1 = userRepository.findUserByUsername(userDTO.getUsername());
+         if( user1.isPresent() &  user1.get().getId() != idUser ){
+             throw new DataAlreadyExistException("user with username=" + userDTO.getUsername() + " already exist !");
+         }
          // --  password encoding --
          BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
          userDTO.setPassword(encoder.encode(userDTO.getPassword()));
