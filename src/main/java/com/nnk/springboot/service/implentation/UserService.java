@@ -87,7 +87,7 @@ public class UserService implements IUserService {
          User user = userRepository.findById(idUser).orElseThrow(()
                  -> new DataNotFoundException("user with id=" + idUser + " not found in DataBase"));
          Optional<User> user1 = userRepository.findUserByUsername(userDTO.getUsername());
-         if( user1.isPresent() &  user1.get().getId() != idUser ){
+         if( user1.isPresent() &&  user1.get().getId() != idUser ){
              throw new DataAlreadyExistException("user with username=" + userDTO.getUsername() + " already exist !");
          }
          // --  password encoding --
