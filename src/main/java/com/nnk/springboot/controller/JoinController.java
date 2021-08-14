@@ -20,7 +20,6 @@ import javax.validation.Valid;
  *  to the application, this account will only have one user authority. The intervention of an Admin will be
  *  necessary for up this account.
  */
-
 @Controller
 public class JoinController {
 
@@ -34,7 +33,6 @@ public class JoinController {
     public String viewJoinPage(UserDTO userDTO) {
         logger.info( "--> Launch /join" );
         return "join";
-
     }
     //-----------------------------------------------------------------------------------------------------------------
     @PostMapping("/join/validate")

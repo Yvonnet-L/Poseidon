@@ -36,7 +36,6 @@ public class BidListService implements IBidListService {
     ModelBuilder modelBuilder;
 
     private static Logger logger = LogManager.getLogger(BidListService.class);
-
     //------------getAllBidList-------------------------------------------------------------------------------------
     /**
      * Method to List All BidList

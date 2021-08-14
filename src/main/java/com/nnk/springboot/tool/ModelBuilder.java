@@ -37,10 +37,8 @@ public class ModelBuilder {
      * @param  bidListDTO BidListDTO
      * @return user User
      */
-
     public BidList buildBidList(final BidListDTO bidListDTO) {
         logger.info( " ---> Launch buildBidList");
-
         return new BidList(bidListDTO.getAccount(), bidListDTO.getType(),
                             bidListDTO.getBidQuantity());
     }

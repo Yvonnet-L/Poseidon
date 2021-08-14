@@ -25,7 +25,7 @@ private static Logger logger = LogManager.getLogger(DtoBuilder.class);
       */
 
      public UserDTO buildUserDTO(final User user) {
-
+         logger.info( " ---> Launch buildUserDTO");
          return new UserDTO(user.getId(),user.getUsername(),
                             user.getPassword(),user.getFullname(), user.getRole());
      }
@@ -36,9 +36,8 @@ private static Logger logger = LogManager.getLogger(DtoBuilder.class);
      * @param bidList BidList
      * @return bidListDTO BidListDTO
      */
-
     public BidListDTO buildUBidListDTO(final BidList bidList) {
-
+        logger.info( " ---> Launch buildUBidListDTO");
         return new BidListDTO(bidList.getBidListId(), bidList.getAccount(),
                                 bidList.getType(), bidList.getBidQuantity());
     }
@@ -51,7 +50,7 @@ private static Logger logger = LogManager.getLogger(DtoBuilder.class);
      */
 
     public CurvePointDTO buildCurvePointDTO(final CurvePoint curvePoint) {
-
+        logger.info( " ---> Launch buildCurvePointDTO");
         return new CurvePointDTO(curvePoint.getId(), curvePoint.getCurveId(),
                 curvePoint.getTerm(), curvePoint.getValue());
     }
@@ -63,6 +62,7 @@ private static Logger logger = LogManager.getLogger(DtoBuilder.class);
      * @return tradeDTO TradeDTO
      */
     public TradeDTO buildTradeDTO(final Trade trade) {
+        logger.info( " ---> Launch buildTradeDTO");
         return new TradeDTO(trade.getTradeId(), trade.getAccount(),
                                 trade.getType(), trade.getBuyQuantity());
     }
@@ -74,6 +74,7 @@ private static Logger logger = LogManager.getLogger(DtoBuilder.class);
      * @return ratingDTO RatingDTO
      */
     public RatingDTO buildRatingDTO(final Rating rating) {
+        logger.info( " ---> Launch buildRatingDTO");
         return new RatingDTO(rating.getId(), rating.getMoodysRating(),rating.getSandRating(),
                              rating.getFitchRating(), rating.getOrderNumber() );
     }
@@ -85,6 +86,7 @@ private static Logger logger = LogManager.getLogger(DtoBuilder.class);
      * @return ruleNameDTO RuleNameDTO
      */
     public RuleNameDTO buildRuleNameDTO(final RuleName ruleName) {
+        logger.info( " ---> Launch buildRuleNameDTO");
         return new RuleNameDTO(ruleName.getId(), ruleName.getName(), ruleName.getDescription(),
                                 ruleName.getJson(), ruleName.getTemplate(), ruleName.getSqlStr(),
                                     ruleName.getSqlPart());

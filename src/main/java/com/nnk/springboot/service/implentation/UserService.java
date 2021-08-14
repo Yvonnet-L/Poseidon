@@ -20,7 +20,12 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * userRepository.findAll()
+ *  UserService
+ *
+ * @See User
+ * @See UserDTO
+ * @See DtoBuilder
+ * @See ModelBuilder
  */
  @Service
 public class UserService implements IUserService {
@@ -50,7 +55,6 @@ public class UserService implements IUserService {
         for (User user: userList){
             userDTOList.add(dtoBuilder.buildUserDTO(user));
         }
-
         return userDTOList;
      }
      //----------------addUser----------------------------------------------------------------------------------

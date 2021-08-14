@@ -10,6 +10,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * MyUserDetails makes the link between the user class of the DB and SpringSecurity
+ *
+ */
+
 public class MyUserDetails implements UserDetails {
 
     private String userName;
@@ -26,8 +31,6 @@ public class MyUserDetails implements UserDetails {
                 .collect(Collectors.toList());
     }
     //------------------------------------------------------------------------------------------
-    //on modifie les return apres voir injecté les methodes
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;

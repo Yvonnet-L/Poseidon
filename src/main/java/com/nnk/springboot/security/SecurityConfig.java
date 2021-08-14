@@ -34,10 +34,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/css/**").permitAll()
-                    .antMatchers("/images/**").permitAll()
+                .antMatchers("/images/**").permitAll()
                 .antMatchers("/join/**").permitAll()
                 .antMatchers("/admin/*").hasAuthority("ADMIN")
-                    .antMatchers("/user/*").hasAuthority("ADMIN")
+                 .antMatchers("/user/*").hasAuthority("ADMIN")
                 .anyRequest().authenticated();
 
         http.formLogin().loginPage("/login").defaultSuccessUrl("/bidList/list").failureUrl("/login?error=true").permitAll();
@@ -48,5 +48,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
-
 }
